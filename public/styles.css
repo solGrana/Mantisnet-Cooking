@@ -13,17 +13,26 @@ body {
 
     height: 100%;
 }
+main{
+    padding-top: 80px;
+    flex: 1;
+}
 
 header {
-    background: linear-gradient(90deg, #617255d2, #aa8a68a2);
-    padding: 5px;
-    border-radius: 20px;
-    margin: 10px;
+    background: linear-gradient(90deg, #8a997f, #cab091);
+    padding: 5px;;
+    border-radius: 5px;
 
     display: flex;
     justify-content: space-between; /* Centra los elementos horizontalmente */
     align-items: center;
     flex-wrap: wrap;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 1000; 
 } 
 
 header ul > li > a {
@@ -226,17 +235,11 @@ footer {
     text-decoration: none; /* Evita el subrayado */
 }
 
-main {
-    flex: 1;
-    /* Hace que el main ocupe el espacio disponible */
-}
-
 footer {
     color: #FFFFFF;
     padding: 5px;
     text-align: center;
-    border-radius: 20px;
-    margin: 10px;
+    border-radius: 5px;
     
     display: flex;
     justify-content: center;
@@ -249,13 +252,11 @@ footer {
         #61725596 40%,
         #61725586 60%,
         #aa8a68a2 80%
-        
         );
         
         /*  animations */
         background-size: 200%;
         animation: shine 15s linear infinite;
-        /* animations */
 }
 
 .footer-content {

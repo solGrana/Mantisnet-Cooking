@@ -6,7 +6,6 @@ body {
     background-color: #ffffff;
     color: #53432a;
 
-
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -16,9 +15,9 @@ body {
 
 header {
     background: linear-gradient(90deg, #617255d2, #aa8a68a2);
-    padding: 5px;
-    border-radius: 20px;
-    margin: 10px;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 
     display: flex;
     justify-content: space-between;
@@ -188,21 +187,26 @@ footer {
     color: #FFFFFF;
     padding: 5px;
     text-align: center;
-    border-radius: 20px;
-    margin: 10px;
-
-    background: linear-gradient(to right,
-            #aa8a68a2 20%,
-            #61725596 40%,
-            #61725586 60%,
-            #aa8a68a2 80%);
-
-    /*  animations */
-    background-size: 200%;
-    animation: shine 15s linear infinite;
-    /* animations */
+    border-radius: 5px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    background: linear-gradient(
+        to right, 
+        #aa8a68a2 20%, 
+        #61725596 40%,
+        #61725586 60%,
+        #aa8a68a2 80%
+        
+        );
+        
+        /*  animations */
+        background-size: 200%;
+        animation: shine 15s linear infinite;
 }
-
 
 #addRecipeBtn {
     position: fixed;
@@ -223,7 +227,6 @@ footer {
 #addRecipeBtn:hover {
     background-color: #d2ab80;
 }
-
 
 /*PARA PANTALLAS MAS CHICAS*/
 @media (max-width: 768px) {

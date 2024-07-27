@@ -1,0 +1,406 @@
+/* styles.css */
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #53432a;
+
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    height: 100%;
+}
+
+header {
+    background: linear-gradient(90deg, #617255d2, #aa8a68a2);
+    padding: 5px;
+    border-radius: 20px;
+    margin: 10px;
+
+    display: flex;
+    justify-content: space-between; /* Centra los elementos horizontalmente */
+    align-items: center;
+    flex-wrap: wrap;
+} 
+
+header ul > li > a {
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+    color: #FFFFFF;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.3em;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    color: #e5d2b8;
+}
+
+nav ul {
+    margin-left: auto; 
+}
+
+/* este no tocar */
+.menu ul {
+    display: inline;
+    list-style-type: none;
+    padding: 0;
+    margin-right: 0;
+    justify-content: center;
+}
+
+.menu {
+    text-align: center;
+    margin: auto;
+    margin-right: auto;
+    display: flex; 
+}
+
+.menu li {
+    margin-left: 25px;
+    /* Espacio entre elementos del menú */
+}
+
+.logo img {
+    width: 100%;
+    height: 100%; 
+    opacity: 0.8; 
+    transform: scale(0.8);
+} 
+
+
+.logo {
+    margin-left: 0px;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+
+    display: flex;
+    justify-content: center;
+}
+
+#searchBar {
+    margin-right: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ffffff15;
+    border-radius: 10px;
+    height: 18px;
+    width: 300px;
+    margin: auto;
+    margin-left: 25px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+
+}
+#searchBar:focus {
+    outline-color: #617255d2;
+    
+}
+
+.admin-button {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.admin-button img {
+    cursor: pointer;
+    opacity: 80%; 
+    width: 100%;
+    height: 100%;
+    transform: scale(0.8);
+
+}
+
+.titulo,
+.subtitulo,
+footer {
+    text-align: center;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* posicion en z, para que aparezca encima de otros elementos */
+    border-radius: 8px; 
+}
+
+.dropdown-content a {
+    color: #725c3a;
+    /* me gusta */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #e5d2b8;
+    color: #725c3a;
+    border-radius: 8px; 
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    /*  padding: 20px; */
+    flex: 1; /* Hace que ocupe el espacio disponible */
+}
+
+.recipes-container {
+    flex: 1;
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 20px; 
+    
+}
+
+.recipe-card {
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.027);
+    text-decoration: none;
+    color: inherit;
+    /* Hereda el color del texto del contenedor */
+}
+
+/*  animation */
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.recipe-card img {
+    width: 250px;
+    /* Ajusta el ancho deseado */
+    height: 200px;
+    /* Ajusta la altura deseada */
+    object-fit: cover;
+    /* Asegura que la imagen se ajuste bien dentro del contenedor */
+    border-radius: 5px;
+}
+
+.recipe-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Sombra más fuerte al hacer hover */
+}
+
+.recipe-card a {
+    color: inherit;
+    text-decoration: none; /* Evita el subrayado */
+}
+
+main {
+    flex: 1;
+    /* Hace que el main ocupe el espacio disponible */
+}
+
+footer {
+    color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 10px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    background: linear-gradient(
+        to right, 
+        #aa8a68a2 20%, 
+        #61725596 40%,
+        #61725586 60%,
+        #aa8a68a2 80%
+        
+        );
+        
+        /*  animations */
+        background-size: 200%;
+        animation: shine 15s linear infinite;
+        /* animations */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+.social-icons {
+    position: absolute;
+    right: 15px; /* Ajusta la distancia del borde derecho */
+    top: 18px;
+}
+
+.social-icons img {
+  height: 30px; 
+}
+
+#addRecipeBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #809671;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;  /* aparece deshabilitado */
+    z-index: 1000; 
+}
+
+#addRecipeBtn:hover {
+    background-color: #d2ab80;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    width: 100px; /* Ancho fijo para los labels */
+    margin-right: 10px;
+}
+
+.form-group input,
+.form-group textarea {
+    flex: 1; /* Los inputs toman el espacio restante */
+}
+
+#modalAddRecipeBtn,  #submitAdminBtn {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    border-radius: 25px; 
+    background-color: #d2ab80; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Agrega una transicion  al color de fondo */
+    font-family: 'Poppins', sans-serif;
+}
+
+#modalAddRecipeBtn:hover, #submitAdminBtn:hover{
+    background-color: #809671;
+}
+
+
+/*PARA PANTALLAS MAS CHICAS*/
+@media (max-width: 768px) {
+    #searchBar {
+        height: auto;
+        width: auto;
+        margin: 0;
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+    .menu ul {
+        display: none; /* Oculta el menú de navegación */
+    }
+
+    .logo {
+        margin-left: 0px;
+        width: 60px;
+        height: 60px;
+        align-items: center;
+    
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: auto; /* Ajusta el ancho automáticamente */
+        height: 100%; /* Altura deseada para el logo */
+        margin: 10px; /* Ajusta el margen según sea necesario */
+    }
+
+    .admin-button {
+        margin-left: -5px;
+    }
+
+    .admin-button img {
+        width: auto; /* Ajusta el ancho automáticamente */
+        height: 100%; /* Altura deseada para el botón de administrador */        
+    }
+}

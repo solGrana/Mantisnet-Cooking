@@ -1,0 +1,113 @@
+/* Estilos para el contenedor de la receta */
+.recipe-container {
+    flex: 1;
+    width: 50%;
+    /* Cambia este valor según el ancho máximo deseado */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #b7c5d300;
+    /* Cambia el color de fondo según tu preferencia */
+    border-radius: 10px;
+    /* Añade esquinas redondeadas al contenedor */
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .recipe-container {
+        display: flex;
+        justify-content: center;
+        /* Centra los elementos horizontalmente */
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}
+
+.recipe-container h2 {
+    text-align: left;
+    font-size: 0.5cm;
+    margin-top: 50px;
+    /* Espacio superior */
+}
+
+/* Estilos para la imagen de la receta */
+#recipeImage {
+    width: 300px;
+    /* Ajusta el ancho deseado */
+    height: 250px;
+    /* Ajusta la altura deseada */
+    object-fit: cover;
+    /* Asegura que la imagen se ajuste bien dentro del contenedor */
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    /* Centra la imagen */
+}
+
+/* Estilos para la descripción de la receta */
+#recipeDescription {
+    text-align: left;
+    /* Alinear el texto a la izquierda */
+    margin-top: 40px;
+    /* Espacio superior */
+    font-style: italic;
+}
+
+/* Estilos para la lista de ingredientes */
+#recipeIngredients {
+    text-align: left;
+    /* Alinear los elementos de la lista a la izquierda */
+    margin-top: 40px;
+    /* Espacio superior */
+}
+
+/* Estilos para los pasos de la receta */
+#recipeSteps {
+    text-align: left;
+    /* Alinear el texto a la izquierda */
+    margin-top: 40px;
+    /* Espacio superior */
+}
+
+.back{
+    display: none;
+}
+
+/*PARA PANTALLAS MAS CHICAS*/
+@media (max-width: 768px) {
+
+    .full-width {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Estilos para la imagen de la receta */
+    #recipeImage {
+        width: 100%;
+        /* Ajusta el ancho deseado */
+        height: 250px;
+        /* Ajusta la altura deseada */
+        object-fit: cover;
+        /* Asegura que la imagen se ajuste bien dentro del contenedor */
+        border-radius: 5px;
+    }
+
+    header{
+        display: none; /* Oculta el menú de navegación */
+    }
+    .back{
+        display: block;
+        position: absolute;
+        top: 10px;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 50px;
+        z-index: 10; /* Asegura que el botón esté encima de la imagen */
+        text-decoration: none;
+    }
+
+    .back img{
+        width: 70%;
+        height: auto;
+    }
+}

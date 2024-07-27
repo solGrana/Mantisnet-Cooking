@@ -1,0 +1,58 @@
+{
+  "recipes": [
+    {
+      "recipeName": "Alfajores",
+      "recipeDescription": "Alfajores tipo Havanna",
+      "recipeIngredients": "100 gr manteca\n25 gr miel\n100 gr azucar\n1 huevo\nEscencia de vainilla\n250 gr harina\n50 gr maizena\n10 gr cacao\n1 cdita polvo para hornear\nChocolate para derretir\nDulce de leche repostero\nOPCIONAL: 10gr de harina de almendras",
+      "recipeSteps": "Mezclar la manteca, miel, azucar, huevo y escencia de vainilla.\nAgregar la harina, maizena, cacao y polvo para hornear. Solo unir los ingredientes.\nDejar reposar en la heladera 30 minutos. Mientras precalentar el horno a 150°.\nEstirar la masa y con un cortante hacer las tapitas.\nLlevar al horno por 8 - 12 minutos.\nDejar enfriar y rellenar con dulce de leche repóstero.\n Derretir el chocolate y bañar los alfajores.",
+      "recipeImage": "images/Alfajores.jpeg",
+      "url": "alfajores.html",
+      "id": "JRmHlQi"
+    },
+    {
+      "recipeName": "Budin de banana",
+      "recipeDescription": "El mejor budin de banana easy peasy",
+      "recipeIngredients": "3 tazas de harina leudante\n1 y 1/4 taza de azucar\n3 bananas\n2 huevos\n5 cucharadas de leche\n125gr manteca\nesencia de vainilla\nOPCIONAL: chips de chocolate u otro topping",
+      "recipeSteps": "Mezclar la harina y el azucar.\nAgregar las bananas pisadas, la manteca derretida y los huevos.\nAgregar la leche y la escencia de vainilla y mezclar.\nLlevar al horno precalentado a 180° por 45 minutos.",
+      "recipeImage": "images/budin.jpeg",
+      "url": "budin-de-banana.html",
+      "id": "p-SaQkb"
+    },
+    {
+      "recipeName": "Cookies",
+      "recipeDescription": "Cookies estilo New York",
+      "recipeIngredients": "200gr manteca\n1 taza / 200gr azucar blanca\n1 taza /200gr azucar negro\n2 huevos + 1 yema de huevo\nescencia de vainilla\n320 gr harina\n1 cucharadita polvo para hornear\n280gr chips de chocolate",
+      "recipeSteps": "Derreti la manteca a fuego lento hasta obtener un color dorado oscuro. \nEn un recipiente, combina la manteca derretida con el azúcar y mezcla hasta integrar. \nAgrega los huevos y la esencia de vainilla, luego incorpora gradualmente la harina. \nAñadi los chips de chocolate. \nForma bolitas con la masa y ponelas en una bandeja para hornear con papel manteca. \nHornea a 160°C durante 12-13 minutos, o hasta que los bordes estén ligeramente dorados.",
+      "recipeImage": "images/cookies.jpeg",
+      "url": "cookies.html",
+      "id": "1khq9hD"
+    },
+    {
+      "recipeName": "Pan avena y miel",
+      "recipeDescription": "Pan tipo Subway de avena dulce y miel",
+      "recipeIngredients": "280 ml agua tibia\n8 cucharadas aceite\n1 huevo\n2 cditas sal\n1 cucharada miel\n600 gr harina 000\n2 cditas levadura seca\n50 gr avena",
+      "recipeSteps": "Mezclar primero el agua, aceite, huevo, miel y sal.\nAgregar la harina, avena y levadura. \nAmasar hasta que la masa quede lisa. Aprox. 10 minutos.\nDejar leudar tapado hasta que duplique su tamaño. Entre 1 y 2 horas.\nDesgasificar y dividir en bollos, darles forma y colocar en placa enharinada, untar con huevo, manteca o leche con azucar y dejarlos reposar entre 20 y 30 minutos mas.\nLlevar al horno precalentado a 180°C por 15 minutos.\n",
+      "recipeImage": "images/panSubway.jpg",
+      "url": "pan-avena-y-miel.html",
+      "id": "NKM9E7n"
+    },
+    {
+      "recipeName": "Brownies",
+      "recipeDescription": "Brownies con cacao en polvo",
+      "recipeIngredients": "150 gr / 1 taza harina 000\n230 gr / 1 taza azucar\n160 gr / 1 taza cacao en polvo\n2 huevos\n75 gr manteca\nEscencia de vainilla",
+      "recipeSteps": "Mezclar la harina, cacao y azucar.\nAgregar la manteca derretida con la escencia de vainilla y los huevos. \nUnir todo y verter la mezcla en un molde enharinado\nLlevar al horno precalentado a 150°C por 25 min.\nDejar enfriar y cortar.\n",
+      "recipeImage": "images/brownies.jpeg",
+      "url": "brownies.html",
+      "id": "TKM9E7z"
+    },
+    {
+      "recipeName": "Ciabatta",
+      "recipeDescription": "Pan ciabatta",
+      "recipeIngredients": "350 g agua\n35 g aceite de oliva\n8 g levadura seca\n400 g harina 000\n8 g sal",
+      "recipeSteps": "Unir todos los ingredientes hasta que la masa quede homogenea.\nDejar reposar 30 minutos y hacer 4 pliegues. \nDejar reposar 30 minutos mas y volver a hacer los pliegues.\nDejar reposar 30 minutos mas.\nSin desgasificar, espolvorear con harina y dividir la masa en 6. (No hace falta darle forma)\nLlevar al horno precalentado a 230°C por 15 minutos.",
+      "recipeImage": "images/ciabatta.png",
+      "url": "ciabatta.html",
+      "id": "jqnxvlh"
+    }
+  ]
+}

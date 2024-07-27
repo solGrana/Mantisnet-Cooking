@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Receta</title>
+    <link rel="stylesheet" href="headerStyle.css">
+    <link rel="stylesheet" href="recipe.css">
+    <script src="recipe.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/InvertedLogo.png" alt="Logo">
+            </a>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Recetas</a>
+                        <div class="dropdown-content" id="recipe-dropdown">
+                            <!-- new recipes are added here -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="admin-button">
+                <a id="adminBtn">
+                    <img src="images/admin.png" alt="Admin" title="Admin">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <a href="index.html" class="back">
+        <img src="images/back.png" alt="back">
+    </a>
+    <img id="recipeImage" src="" alt="">
+    <div class="recipe-container">
+        <h1 id="recipeName">[Título de la Receta]</h1>
+        <p id="recipeDescription">[Descripción de la Receta]</p>
+        <h2>Ingredientes</h2>
+        <ul id="recipeIngredients">
+            <!-- Ingredientes -->
+        </ul>
+        <h2>Instrucciones</h2>
+        <div id="recipeSteps">
+            <!-- Instrucciones -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Mantisnet </p>
+    </footer>
+</body>
+
+</html>

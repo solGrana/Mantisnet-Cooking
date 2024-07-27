@@ -1,0 +1,264 @@
+/* styles.css */
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #53432a;
+
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    height: 100%;
+}
+
+header {
+    background: linear-gradient(90deg, #617255d2, #aa8a68a2);
+    padding: 5px;
+    border-radius: 20px;
+    margin: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    /* Centra los elementos horizontalmente */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header ul>li>a {
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+    color: #FFFFFF;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.3em;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    color: #e5d2b8;
+}
+
+nav ul {
+    margin-left: auto;
+}
+
+/* este no tocar */
+.menu ul {
+    display: inline;
+    list-style-type: none;
+    padding: 0;
+    margin-right: 0;
+    justify-content: center;
+}
+
+.menu {
+    text-align: center;
+    margin: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.menu li {
+    margin-left: 25px;
+    /* Espacio entre elementos del menú */
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    transform: scale(0.8);
+}
+
+
+.logo {
+    margin-left: 0px;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+
+    display: flex;
+    justify-content: center;
+}
+
+.admin-button {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.admin-button img {
+    cursor: pointer;
+    opacity: 80%;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.8);
+
+}
+
+.titulo,
+.subtitulo,
+footer {
+    text-align: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /* posicion en z, para que aparezca encima de otros elementos */
+    border-radius: 8px;
+}
+
+.dropdown-content a {
+    color: #725c3a;
+    /* me gusta */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #e5d2b8;
+    color: #725c3a;
+    border-radius: 8px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    /*  padding: 20px; */
+    flex: 1;
+    /* Hace que ocupe el espacio disponible */
+}
+
+.recipes-container {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 20px;
+
+}
+
+/*  animation */
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+
+main {
+    flex: 1;
+    /* Hace que el main ocupe el espacio disponible */
+}
+
+footer {
+    color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 10px;
+
+    background: linear-gradient(to right,
+            #aa8a68a2 20%,
+            #61725596 40%,
+            #61725586 60%,
+            #aa8a68a2 80%);
+
+    /*  animations */
+    background-size: 200%;
+    animation: shine 15s linear infinite;
+    /* animations */
+}
+
+
+#addRecipeBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #809671;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    /* aparece deshabilitado */
+}
+
+#addRecipeBtn:hover {
+    background-color: #d2ab80;
+}
+
+
+/*PARA PANTALLAS MAS CHICAS*/
+@media (max-width: 768px) {
+    .admin-button {
+        display: flex;
+        /* Asegura que el admin-button sea visible */
+        justify-content: flex-end;
+        /* Alinea el admin-button a la derecha */
+        margin-right: 20px;
+        /* Ajusta el margen derecho según sea necesario */
+    }
+
+    .logo {
+        margin-left: 0px;
+        width: 60px;
+        height: 60px;
+        align-items: center;
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: auto;
+        /* Ajusta el ancho automáticamente */
+        height: 100%;
+        /* Altura deseada para el logo */
+        margin: 10px;
+        /* Ajusta el margen según sea necesario */
+    }
+
+    .admin-button img {
+        width: auto;
+        /* Ajusta el ancho automáticamente */
+        height: 100%;
+        /* Altura deseada para el botón de administrador */
+    }
+}

@@ -53,6 +53,15 @@
       "recipeImage": "images/ciabatta.png",
       "url": "ciabatta.html",
       "id": "jqnxvlh"
+    },
+    {
+      "recipeName": "Vainillas",
+      "recipeDescription": "Vainillas clasicas",
+      "recipeIngredients": "100gr Azucar.\n4 Yemas.\n4 claras.\n110gr Harina.\nEscencia de vainilla.",
+      "recipeSteps": "En batidora batir las claras a punto nieve con 50 gramos de azúcar.\nMezclar en un bol yemas con 50 gramos de azúcar.\nAgregar la mitad de las claras al bol de las yemas y mezclar bien.\nAñadir harina tamizada y con movimientos envolventes incorporar.\nIncorporar las claras restantes y unirlas con movimientos envolventes.\nAgregar esencia de vainilla.\nColocar la preparación en una manga y darle forma sobre una placa con papel manteca.\nEspolvorear las vainillas con azúcar.\nRociar con agua y cocinar en horno a 180 °C hasta dorar (10 minutos).",
+      "recipeImage": "images/vainillas.jpeg",
+      "url": "vainillas.html",
+      "id": "id-1724272160960-e44kobkk1"
     }
   ]
 }

@@ -21,7 +21,6 @@ main{
 header {
     background: linear-gradient(90deg, #8a997f, #cab091);
     padding: 5px;;
-    border-radius: 5px;
 
     display: flex;
     justify-content: space-between; /* Centra los elementos horizontalmente */
@@ -240,8 +239,6 @@ footer {
     color: #FFFFFF;
     padding: 5px;
     text-align: center;
-    border-radius: 5px;
-    
     display: flex;
     justify-content: center;
     align-items: center;

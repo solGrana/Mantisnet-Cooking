@@ -16,7 +16,6 @@ body {
 header {
     background: linear-gradient(90deg, #617255d2, #aa8a68a2);
     padding: 2px;
-    border-radius: 5px;
     margin-bottom: 10px;
 
     display: flex;
@@ -187,7 +186,6 @@ footer {
     color: #FFFFFF;
     padding: 5px;
     text-align: center;
-    border-radius: 5px;
     
     display: flex;
     justify-content: center;

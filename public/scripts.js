@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Para agregar nuevas recetas
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     //recuperar el estado de adminAccess
     const adminAccess = localStorage.getItem('adminAccess');
 
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
         try {
             const response = await fetch('/recipes', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newRecipe)
             });
             if (response.ok) {
@@ -128,28 +128,28 @@ function generateUniqueId() {
 
 
 // Lógica para el modal de administrador
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const adminBtn = document.getElementById("adminBtn");
     const adminModal = document.getElementById("adminModal");
     const closeModalBtn = adminModal.querySelector(".close");
     const adminForm = document.getElementById("adminForm"); // Asegúrate de tener un formulario con id "adminForm"
 
-    adminBtn.addEventListener("click", function() {
+    adminBtn.addEventListener("click", function () {
         adminModal.style.display = "block";
     });
 
-    closeModalBtn.addEventListener("click", function() {
+    closeModalBtn.addEventListener("click", function () {
         adminModal.style.display = "none";
     });
 
-    window.addEventListener("click", function(event) {
+    window.addEventListener("click", function (event) {
         if (event.target == adminModal) {
             adminModal.style.display = "none";
         }
     });
 
     // lógica para verificar la contraseña de administrador (TEST)
-    adminForm.addEventListener("submit", function(e) {
+    adminForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const adminPassword = document.getElementById("adminPassword").value;
         // Verificar la contraseña (hardcodeada para testing)
@@ -163,4 +163,10 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("Contraseña incorrecta. Inténtelo de nuevo.");
         }
     });
-});
+
+    // Función para cerrar sesión
+    function logout() {
+        localStorage.removeItem('adminAccess'); // Elimina el estado guardado
+        document.getElementById('addRecipeBtn').style.display = 'none';
+    }
+}); 

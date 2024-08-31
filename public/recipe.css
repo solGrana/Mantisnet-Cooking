@@ -54,10 +54,9 @@
 
 /* Estilos para la lista de ingredientes */
 #recipeIngredients {
-    text-align: left;
-    /* Alinear los elementos de la lista a la izquierda */
-    margin-top: 40px;
-    /* Espacio superior */
+    text-align: left;/* Alinear los elementos de la lista a la izquierda */
+    margin-top: 40px; /* Espacio superior */
+    list-style-type: none; /* Saca los puntos de lista */
 }
 
 /* Estilos para los pasos de la receta */

@@ -56,6 +56,7 @@ function loadRecipe(id) {
                 recipeSteps.innerText = recipe.recipeSteps;
                 */
 
+                /*
                 // Mostrar los ingredientes permitiendo HTML
                 const ingredientsList = document.getElementById('recipeIngredients');
                 ingredientsList.innerHTML = recipe.recipeIngredients.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML
@@ -63,6 +64,20 @@ function loadRecipe(id) {
                 // Mostrar los pasos a paso respetando los saltos de línea y tabulaciones
                 const recipeSteps = document.getElementById('recipeSteps');
                 recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
+                */
+                   // Mostrar los ingredientes con checkbox
+                   const ingredientsList = document.getElementById('recipeIngredients');
+                   ingredientsList.innerHTML = '';
+                   recipe.recipeIngredients.split(',').forEach(ingredient => {
+                       const li = document.createElement('li');
+                       li.innerHTML = `
+                           <input type="checkbox" class="ingredient-checkbox">
+                           ${ingredient.trim()}
+                       `;
+                       ingredientsList.appendChild(li);
+                   });
+                   const recipeSteps = document.getElementById('recipeSteps');
+                   recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
                 
             } else {
                 document.body.innerHTML = '<h1>Receta no encontrada</h1>';

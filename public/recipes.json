@@ -23,7 +23,7 @@
       "recipeDescription": "Cookies estilo New York",
       "recipeIngredients": "200gr manteca\n1 taza / 200gr azucar blanca\n1 taza /200gr azucar negro\n2 huevos + 1 yema de huevo\nescencia de vainilla\n320 gr harina\n1 cucharadita polvo para hornear\n280gr chips de chocolate",
       "recipeSteps": "Derreti la manteca a fuego lento hasta obtener un color dorado oscuro. \nEn un recipiente, combina la manteca derretida con el azúcar y mezcla hasta integrar. \nAgrega los huevos y la esencia de vainilla, luego incorpora gradualmente la harina. \nAñadi los chips de chocolate. \nForma bolitas con la masa y ponelas en una bandeja para hornear con papel manteca. \nHornea a 160°C durante 12-13 minutos, o hasta que los bordes estén ligeramente dorados.",
-      "recipeImage": "images/cookies.jpeg",
+      "recipeImage": "images/cookies2.jpeg",
       "url": "cookies.html",
       "id": "1khq9hD"
     },
@@ -62,6 +62,15 @@
       "recipeImage": "images/vainillas.jpeg",
       "url": "vainillas.html",
       "id": "id-1724272160960-e44kobkk1"
+    },
+    {
+      "recipeName": "Tiramisu",
+      "recipeDescription": "Un clásico italiano con café y crema, fácil y rico.",
+      "recipeIngredients": "café,\n4 yemas de huevo,\n100 g de azúcar,\n500 g de queso mascarpone,\n4 claras de huevo,\n<a href=\"recipeTemplate.html?id=id-1724272160960-e44kobkk1\">Vainillas</a>,\nCacao en polvo",
+      "recipeSteps": "Batí en baño maria 4 yemas de huevo con 100 g de azúcar hasta disolverlo.\nAgregá 500 g de mascarpone y mezclá bien.\nBatí 4 claras a punto de nieve y sumalas a la crema con movimientos envolventes.\nMoja las vainillas en el cafe (le podes agregar algun licor) y ponelas en un molde.\nCubrí con una capa de crema.\nRepetí las capas de vainilas y crema, terminando con crema.\nEnfrialo en la heladera.\nAntes de servir, espolvoreá cacao en polvo arriba.",
+      "recipeImage": "images/tiramisu.jpeg",
+      "url": "tiramisu.html",
+      "id": "id-1725110401920-072rlmy11"
     }
   ]
 }

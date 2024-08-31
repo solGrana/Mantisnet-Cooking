@@ -47,6 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Para agregar nuevas recetas
 document.addEventListener("DOMContentLoaded", function() {
+    //recuperar el estado de adminAccess
+    const adminAccess = localStorage.getItem('adminAccess');
+
+    if (adminAccess === 'true') {
+        document.getElementById('addRecipeBtn').style.display = 'block';
+    }
+
     // Obtiene los elementos del DOM para el modal, botón, cerrar y formulario
     const modal = document.getElementById("recipeModal");
     const btn = document.getElementById("addRecipeBtn");
@@ -151,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Contraseña correcta, habilitar el botón de agregar receta
             document.getElementById('addRecipeBtn').style.display = 'block';
             adminModal.style.display = "none";
+            localStorage.setItem('adminAccess', 'true'); // Guardar estado en localStorage
         } else {
             alert("Contraseña incorrecta. Inténtelo de nuevo.");
         }

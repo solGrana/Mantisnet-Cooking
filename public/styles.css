@@ -386,9 +386,12 @@ footer {
     background-color: #e7f4e4; /* Fondo verde claro */
     padding-bottom: 30px;
     padding-top: 30px;
-
 }
-
+#verifiedModal .modal-content .button-container {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    margin-top: 20px; /* Añade un margen superior para separar los botones del texto */
+}
 #verifiedModal #adminVerifiedText {
     font-size: 18px;
     padding-bottom: 20px;
@@ -397,8 +400,21 @@ footer {
 }
 
 #verifiedModal #logoutBtn {
-    display: block;
-    margin: 0 auto;
+   /*  display: block; */
+    margin: 0 30px; 
+    border: none;
+    border-radius: 25px; 
+    background-color: #e7f4e400;
+    color: #bd9872; /* Color del texto */
+    padding: 5px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Agrega una transicion  al color de fondo */
+    font-family: 'Poppins', sans-serif;
+}
+
+#verifiedModal #okBtn {
+   /*  display: block; */
+    margin: 0 30px; 
     border: none;
     border-radius: 25px; 
     background-color: #d2ab80; /* Color de fondo */
@@ -409,10 +425,12 @@ footer {
     font-family: 'Poppins', sans-serif;
 }
 
-#verifiedModal #logoutBtn:hover {
-    background-color: #bd9872;
+#verifiedModal #logoutBtn:hover{
+    color: #b89069;
 }
-
+#verifiedModal #okBtn:hover{
+    background-color: #c29b75;
+}
 /*PARA PANTALLAS MAS CHICAS*/
 @media (max-width: 768px) {
     #searchBar {

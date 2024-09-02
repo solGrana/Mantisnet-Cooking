@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Error fetching recipes:', error));
 });
 
-function changeUserImage(image){
+function changeUserImage(image) {
     const admiBtn = document.getElementById('adminBtn');
     const adminImg = adminBtn.querySelector('img');
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (adminAccess === 'true') {
         document.getElementById('addRecipeBtn').style.display = 'block'; // Muestra el botón de agregar receta si el usuario es administrador
         //Mostrar el logo de admin verified
-       changeUserImage('images/verifiedUs2.png');
+        changeUserImage('images/verifiedUs2.png');
     }
 
     // Obtiene los elementos del DOM para el modal, botón, cerrar y formulario
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Muestra el modal cuando se hace clic en el botón
     btn.onclick = () => {
         modal.style.display = "block";
-        modal.classList.add('show'); 
+        modal.classList.add('show');
     };
 
     // Cierra el modal cuando se hace clic en el span (x)
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const adminBtn = document.getElementById("adminBtn");
     const adminModal = document.getElementById("adminModal");
     const closeModalBtn = adminModal.querySelector(".close");
-    const adminForm = document.getElementById("adminForm"); 
+    const adminForm = document.getElementById("adminForm");
 
     const verifiedModal = document.getElementById("verifiedModal");
     const verifiedCloseModalBtn = verifiedModal.querySelector(".close");
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
             hideModal(verifiedModal);
         }
     });
-    
+
     // lógica para verificar la contraseña de administrador (TEST)
     adminForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -220,14 +220,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    document.getElementById("okBtn").addEventListener("click", function () {
+        var modal = document.getElementById("verifiedModal");
+        hideModal(verifiedModal);
+    });
+
+
     // cerrar sesion
     logoutBtn.addEventListener("click", function () {
         localStorage.removeItem('adminAccess'); // Elimina el estado guardado
         document.getElementById('addRecipeBtn').style.display = 'none'; // Oculta el botón de agregar receta
         hideModal(verifiedModal);// Cierra el modal de usuario verificado
         adminForm.style.display = "block"; // Muestra el formulario de ingreso de contraseña
-        showAdminModal();+
-        changeUserImage('images/admin.png');
+        showAdminModal(); +
+            changeUserImage('images/admin.png');
 
     });
 }); 

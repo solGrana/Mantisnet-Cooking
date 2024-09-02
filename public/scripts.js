@@ -46,6 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Error fetching recipes:', error));
 });
 
+function changeUserImage(image){
+    const admiBtn = document.getElementById('adminBtn');
+    const adminImg = adminBtn.querySelector('img');
+
+    adminImg.src = image;
+}
+
+
 // Para agregar nuevas recetas
 document.addEventListener("DOMContentLoaded", function () {
     //recuperar el estado de adminAccess del localStorage
@@ -53,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (adminAccess === 'true') {
         document.getElementById('addRecipeBtn').style.display = 'block'; // Muestra el botón de agregar receta si el usuario es administrador
-        //Mostrar el modal de admin verified
+        //Mostrar el logo de admin verified
+       changeUserImage('images/verifiedUs2.png');
     }
 
     // Obtiene los elementos del DOM para el modal, botón, cerrar y formulario
@@ -65,8 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Muestra el modal cuando se hace clic en el botón
     btn.onclick = () => {
         modal.style.display = "block";
-        /* modal.classList.add('show'); */
-
+        modal.classList.add('show'); 
     };
 
     // Cierra el modal cuando se hace clic en el span (x)
@@ -205,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('addRecipeBtn').style.display = 'block';// Contraseña correcta, habilitar el botón de agregar receta
             hideModal(adminModal); // Cierra el modal 
             showVerifiedModal() // Abre el modal de usuario verificado
+            changeUserImage('images/verifiedUs2.png');
             localStorage.setItem('adminAccess', 'true'); // Guardar estado en localStorage
         } else {
             alert("Contraseña incorrecta. Inténtelo de nuevo.");
@@ -217,6 +226,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('addRecipeBtn').style.display = 'none'; // Oculta el botón de agregar receta
         hideModal(verifiedModal);// Cierra el modal de usuario verificado
         adminForm.style.display = "block"; // Muestra el formulario de ingreso de contraseña
-        showAdminModal();
+        showAdminModal();+
+        changeUserImage('images/admin.png');
+
     });
 }); 

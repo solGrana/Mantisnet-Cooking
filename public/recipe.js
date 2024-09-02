@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('recipes.json')
         .then(response => response.json()) // Convierte la respuesta a JSON
         .then(recipes => {
-             // Obtiene los elementos del DOM para el dropdown y el contenedor de recetas
+            // Obtiene los elementos del DOM para el dropdown y el contenedor de recetas
             const recipeDropdown = document.getElementById('recipe-dropdown');
             const recipesContainer = document.getElementById('recipes-container');
 
@@ -41,44 +41,20 @@ function loadRecipe(id) {
                 document.getElementById('recipeName').alt = recipe.recipeName;
                 document.getElementById('recipeDescription').textContent = recipe.recipeDescription;
 
-                /*
+                // Mostrar los ingredientes con checkbox
                 const ingredientsList = document.getElementById('recipeIngredients');
-                
-                // Dividir los ingredientes por saltos de línea y agregar cada uno como un elemento de lista
-                const ingredients = recipe.recipeIngredients.split('\n');
-                ingredients.forEach(ingredient => {
+                ingredientsList.innerHTML = '';
+                recipe.recipeIngredients.split(',').forEach(ingredient => {
                     const li = document.createElement('li');
-                    li.textContent = ingredient.trim(); // Eliminar espacios adicionales
-                    ingredientsList.appendChild(li);
-                });
-                // Mostrar los pasos a paso respetando los saltos de línea y tabulaciones
-                const recipeSteps = document.getElementById('recipeSteps');
-                recipeSteps.innerText = recipe.recipeSteps;
-                */
-
-                /*
-                // Mostrar los ingredientes permitiendo HTML
-                const ingredientsList = document.getElementById('recipeIngredients');
-                ingredientsList.innerHTML = recipe.recipeIngredients.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML
-                
-                // Mostrar los pasos a paso respetando los saltos de línea y tabulaciones
-                const recipeSteps = document.getElementById('recipeSteps');
-                recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
-                */
-                   // Mostrar los ingredientes con checkbox
-                   const ingredientsList = document.getElementById('recipeIngredients');
-                   ingredientsList.innerHTML = '';
-                   recipe.recipeIngredients.split(',').forEach(ingredient => {
-                       const li = document.createElement('li');
-                       li.innerHTML = `
+                    li.innerHTML = `
                            <input type="checkbox" class="ingredient-checkbox">
                            ${ingredient.trim()}
                        `;
-                       ingredientsList.appendChild(li);
-                   });
-                   const recipeSteps = document.getElementById('recipeSteps');
-                   recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
-                
+                    ingredientsList.appendChild(li);
+                });
+                const recipeSteps = document.getElementById('recipeSteps');
+                recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
+
             } else {
                 document.body.innerHTML = '<h1>Receta no encontrada</h1>';
             }
@@ -91,7 +67,7 @@ function loadRecipe(id) {
 
 
 // Cargar la receta al cargar la página
-window.onload = function() {
+window.onload = function () {
     const params = getQueryParams();
     if (params.id) {
         loadRecipe(params.id);

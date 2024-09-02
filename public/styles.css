@@ -297,8 +297,8 @@ footer {
 /* Modal styles */
 .modal {
     display: none; /* Ocultar el modal por defecto */
-    position: fixed;
-    z-index: 1;
+    position: fixed;/* Fija el modal en la pantalla */
+    z-index: 1;/* Asegura que el modal esté sobre otros elementos */
     left: 0;
     top: 0;
     width: 100%;
@@ -306,6 +306,13 @@ footer {
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
+}
+
+
+@keyframes show{
+    0%{
+        transform: translateY(-30vh);
+    }
 }
 
 .modal-content {
@@ -316,6 +323,16 @@ footer {
     width: 80%;
     max-width: 600px;
     border-radius: 10px;
+}
+
+/* Cuando se muestra el modal */
+.modal.show {
+    display: block; /* Muestra el modal */
+    transform: scale(1); /* Escala a su tamaño original */
+}
+.modal.show .modal-content {
+    transform: translateY(0); /* Desplaza al contenido a su posición original */
+    animation: show .8s;
 }
 
 .close {
@@ -364,6 +381,37 @@ footer {
     background-color: #809671;
 }
 
+/* Estilos específicos para el modal de usuario verificado */
+#verifiedModal .modal-content {
+    background-color: #e7f4e4; /* Fondo verde claro */
+    padding-bottom: 30px;
+    padding-top: 30px;
+
+}
+
+#verifiedModal #adminVerifiedText {
+    font-size: 18px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #388e3c; /* Verde más oscuro */
+}
+
+#verifiedModal #logoutBtn {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    border-radius: 25px; 
+    background-color: #d2ab80; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 5px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Agrega una transicion  al color de fondo */
+    font-family: 'Poppins', sans-serif;
+}
+
+#verifiedModal #logoutBtn:hover {
+    background-color: #bd9872;
+}
 
 /*PARA PANTALLAS MAS CHICAS*/
 @media (max-width: 768px) {

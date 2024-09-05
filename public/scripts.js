@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const isAdmin = localStorage.getItem('adminAccess');
     // Realiza una petición para obtener el archivo JSON con las recetas
     fetch('recipes.json')
         .then(response => response.json()) // Convierte la respuesta a JSON
@@ -18,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     dropdownLink.textContent = recipe.recipeName;
                     recipeDropdown.appendChild(dropdownLink);
 
+                    // Crea un container para la card y el deleteBTN
+                    const recipeCardContainer = document.createElement('div');
+                    recipeCardContainer.classList.add('recipe-card-container');
+
                     // Crea una tarjeta de receta y agrega la receta al contenedor de recetas
                     const recipeCard = document.createElement('a');
                     recipeCard.href = `recipeTemplate.html?id=${recipe.id}`;
@@ -27,7 +32,28 @@ document.addEventListener("DOMContentLoaded", function () {
                         <h2>${recipe.recipeName}</h2>
                         <p>${recipe.recipeDescription}</p>
                     `;
-                    recipesContainer.appendChild(recipeCard);
+                    // Agrega el boton de eliminar solo si el usuario está autenticado como administrador
+                    if (isAdmin) {
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Eliminar Receta';
+                        deleteButton.classList.add('delete-btn');
+                        deleteButton.dataset.id = recipe.id; // Asocia el ID de la receta al botón
+
+                /*         deleteButton.addEventListener('click', () => {
+                            // e.stopPropagation();  Evita que el clic del botón navegue a la receta
+                            deleteRecipe(recipe.id);
+                        }); */
+
+                        /*  recipesContainer.appendChild(recipeCard); */
+
+                        // Añadir el botón al contenedor
+                        recipeCardContainer.appendChild(deleteButton);
+
+                    }
+                    // Añadir la tarjeta al contenedor
+                    recipeCardContainer.appendChild(recipeCard);
+                    // Añadir el contenedor al contenedor principal de recetas
+                    recipesContainer.appendChild(recipeCardContainer);
                 });
             }
 
@@ -131,6 +157,81 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function deleteRecipe(recipeId) {
+    fetch(`/recipes/${recipeId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    })
+        .then(response => {
+            if (response.ok) {
+                // Encuentra el botón de eliminar en el DOM
+                const deleteButton = document.querySelector(`.delete-btn[data-id="${recipeId}"]`);
+                if (deleteButton) {
+                    // Encuentra el contenedor de la tarjeta o la tarjeta misma
+                    const recipeCardContainer = deleteButton.closest('.recipe-card-container');
+                    if (recipeCardContainer) {
+                        recipeCardContainer.remove(); // Elimina el contenedor de la tarjeta
+                    } else {
+                        console.error('Contenedor de la tarjeta no encontrado');
+                    }
+                } else {
+                    console.error('Botón de eliminar no encontrado');
+                }
+            } else {
+                console.error('Error al eliminar la receta', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud de eliminación:', error);
+            alert('Error al eliminar la receta');
+        });
+}
+
+
+// modal Para eliminar nuevas recetas
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Obtiene los elementos del DOM para el modal
+    const confirmDeleteModal = document.getElementById("confirmDeleteModal");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    let confirmDeleteRecipeId = null; // Variable para almacenar el ID de la receta a eliminar
+
+    // Maneja el clic en el botón de eliminar receta
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('delete-btn')) {
+            const recipeId = event.target.dataset.id;
+            showConfirmDeleteModal(recipeId);
+        }
+        // Muestra el modal de confirmación de eliminación y almacena el ID de la receta
+        function showConfirmDeleteModal(recipeId) {
+            confirmDeleteRecipeId = recipeId; // Almacena el ID de la receta a eliminar
+            showModal(confirmDeleteModal);
+        }
+    });
+      // Maneja la confirmación de eliminación
+      confirmDeleteBtn.addEventListener('click', function () {
+        if (confirmDeleteRecipeId) {
+            deleteRecipe(confirmDeleteRecipeId);
+            hideModal(confirmDeleteModal);
+            confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
+        }
+    });
+    // Maneja el cancelamiento de la eliminación
+    cancelDeleteBtn.addEventListener('click', function () {
+        hideModal(confirmDeleteModal);
+        confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
+    });
+    span.addEventListener('click', function () {
+        hideModal(confirmDeleteModal);
+        confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
+    });
+    window.addEventListener('click', function () {
+        hideModal(confirmDeleteModal);
+        confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
+    });
+});
+
 function generateRecipeUrl(recipeName) {
     // Reemplaza los espacios por guiones, convierte a minúsculas y agrega la extensión .html
     return recipeName.trim().toLowerCase().replace(/\s+/g, '-') + '.html';
@@ -139,6 +240,15 @@ function generateRecipeUrl(recipeName) {
 // Genera un ID único para cada receta
 function generateUniqueId() {
     return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+}
+// Función para mostrar un modal
+function showModal(modal) {
+    modal.classList.add('show');
+}
+
+// Función para ocultar un modal
+function hideModal(modal) {
+    modal.classList.remove('show');
 }
 
 // Lógica para el modal de administrador
@@ -151,15 +261,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const verifiedModal = document.getElementById("verifiedModal");
     const verifiedCloseModalBtn = verifiedModal.querySelector(".close");
 
-    // Función para mostrar un modal
-    function showModal(modal) {
-        modal.classList.add('show');
-    }
-
-    // Función para ocultar un modal
-    function hideModal(modal) {
-        modal.classList.remove('show');
-    }
 
     // Muestra el modal de ingreso
     function showAdminModal() {
@@ -215,6 +316,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showVerifiedModal() // Abre el modal de usuario verificado
             changeUserImage('images/verifiedUs2.png');
             localStorage.setItem('adminAccess', 'true'); // Guardar estado en localStorage
+            window.location.reload(); // Recarga la página para reflejar los cambios
         } else {
             alert("Contraseña incorrecta. Inténtelo de nuevo.");
         }
@@ -232,8 +334,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('addRecipeBtn').style.display = 'none'; // Oculta el botón de agregar receta
         hideModal(verifiedModal);// Cierra el modal de usuario verificado
         adminForm.style.display = "block"; // Muestra el formulario de ingreso de contraseña
-        showAdminModal(); +
-            changeUserImage('images/admin.png');
-
+        showAdminModal();
+        changeUserImage('images/admin.png');
+        window.location.reload(); // Recarga la página para reflejar los cambios
     });
 }); 

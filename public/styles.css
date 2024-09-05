@@ -194,7 +194,7 @@ footer {
     
 }
 
-.recipe-card {
+.recipe-card-container {
     transition: transform 0.3s;
     border-radius: 5px;
     margin: 10px;
@@ -205,6 +205,11 @@ footer {
     text-decoration: none;
     color: inherit;
     /* Hereda el color del texto del contenedor */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    position: relative; /* Necesario para el posicionamiento absoluto del botón */
 }
 
 /*  animation */
@@ -214,7 +219,7 @@ footer {
     }
 }
 
-.recipe-card img {
+.recipe-card-container img {
     width: 250px;
     /* Ajusta el ancho deseado */
     height: 200px;
@@ -224,16 +229,37 @@ footer {
     border-radius: 5px;
 }
 
-.recipe-card:hover {
+.recipe-card-container:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     /* Sombra más fuerte al hacer hover */
 }
 
-.recipe-card a {
+.recipe-card-container a {
     color: inherit;
     text-decoration: none; /* Evita el subrayado */
 }
+
+.delete-btn {
+    background-color: rgb(182, 1, 1);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 8px;
+    z-index: 1; /* botón encima de la card */
+
+    position: absolute; /* Posiciona el botón en relación al contenedor */
+    bottom: 0px; /* Espacio desde el fondo del contenedor */
+    left: 50%; /* Centra el botón horizontalmente */
+    transform: translateX(-50%); /* Ajusta el botón para que esté centrado */
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
 
 footer {
     color: #FFFFFF;
@@ -430,6 +456,23 @@ footer {
 }
 #verifiedModal #okBtn:hover{
     background-color: #c29b75;
+}
+#confirmDeleteBtn,
+#cancelDeleteBtn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#confirmDeleteBtn {
+    background-color: #ce3025; /* Rojo para el botón de confirmación */
+    color: white;
+}
+
+#cancelDeleteBtn {
+    background-color: #758a68; /* Gris para el botón de cancelación */
+    color: white;
 }
 /*PARA PANTALLAS MAS CHICAS*/
 @media (max-width: 768px) {

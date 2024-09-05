@@ -50,6 +50,34 @@ app.post('/recipes', (req, res) => {
     });
 });
 
+// Ruta para eliminar una receta
+app.delete('/recipes/:id', (req, res) => {
+    const recipeId = req.params.id;
+    const filePath = path.join(__dirname, 'public', 'recipes.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error reading recipes.json');
+        }
+        let recipes = JSON.parse(data);
+
+        // Verifica si recipes es un array
+        if (!Array.isArray(recipes.recipes)) {
+            return res.status(500).send('Error: recipes is not an array');
+        }
+
+        // Filtra la receta que no se quiere eliminar
+        recipes.recipes = recipes.recipes.filter(recipe => recipe.id !== recipeId);
+
+        fs.writeFile(filePath, JSON.stringify(recipes, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error writing to recipes.json');
+            }
+            res.status(200).send('Recipe deleted successfully');
+        });
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -270,7 +270,7 @@ footer {
 }
 
 .edit-btn {
-    background-color: none;
+    background-color:  rgba(136, 136, 136, 0);
     color: rgb(136, 136, 136);
     border: none;
     cursor: pointer;
@@ -422,7 +422,7 @@ footer {
     flex: 1; /* Los inputs toman el espacio restante */
 }
 
-#modalAddRecipeBtn,  #submitAdminBtn {
+#modalAddRecipeBtn,  #submitAdminBtn, #updateRecipeBtn {
     display: block;
     margin: 0 auto;
     border: none;

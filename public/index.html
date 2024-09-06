@@ -122,7 +122,7 @@
     <!-- Modal for recipe elimination confirmation -->
     <div id="confirmDeleteModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span id="x" class="close">&times;</span>
             <h2>¿Estás seguro de que queres eliminar esta receta?</h2>
             <div class="button-container">
                 <button id="confirmDeleteBtn">Sí, eliminar</button>
@@ -130,6 +130,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for editing existing recipe -->
+<div id="editRecipeModal" class="modal">
+    <div class="modal-content">
+        <span id="closeEdit"  class="close">&times;</span>
+        <h2>Editar Receta</h2>
+        <form id="editRecipeForm">
+            <div class="form-group">
+                <label for="editRecipeName">Nombre de la receta:</label>
+                <input type="text" id="editRecipeName" name="recipeName" required>
+            </div>
+            <div class="form-group">
+                <label for="editRecipeDescription">Descripción breve:</label>
+                <textarea id="editRecipeDescription" name="recipeDescription" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editRecipeIngredients">Ingredientes:</label>
+                <textarea id="editRecipeIngredients" name="recipeIngredients"
+                    placeholder="Ejemplo: 1 taza de azúcar, 2 huevos... (separado por comas)" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editRecipeSteps">Paso a paso:</label>
+                <textarea id="editRecipeSteps" name="recipeSteps" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editRecipeImage">URL de la imagen:</label>
+                <input type="text" id="editRecipeImage" name="recipeImage">
+            </div>
+            <button type="submit" id="updateRecipeBtn">Actualizar Receta</button>
+        </form>
+    </div>
+</div>
+
+    
 
 </body>
 

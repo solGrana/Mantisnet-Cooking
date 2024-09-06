@@ -28,31 +28,32 @@ document.addEventListener("DOMContentLoaded", function () {
                     recipeCard.href = `recipeTemplate.html?id=${recipe.id}`;
                     recipeCard.classList.add('recipe-card');
                     recipeCard.innerHTML = `
-                        <img src="${recipe.recipeImage}" alt="${recipe.recipeImage}">
-                        <h2>${recipe.recipeName}</h2>
-                        <p>${recipe.recipeDescription}</p>
-                    `;
-                    // Agrega el boton de eliminar solo si el usuario está autenticado como administrador
+                <img src="${recipe.recipeImage}" alt="${recipe.recipeImage}">
+                <h2>${recipe.recipeName}</h2>
+                <p>${recipe.recipeDescription}</p>
+                `;
+                    // Agrega el boton de eliminar y editar solo si el usuario está autenticado como administrador
                     if (isAdmin) {
                         const deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Eliminar Receta';
+                        deleteButton.innerHTML = '&times;';
                         deleteButton.classList.add('delete-btn');
                         deleteButton.dataset.id = recipe.id; // Asocia el ID de la receta al botón
-
-                /*         deleteButton.addEventListener('click', () => {
-                            // e.stopPropagation();  Evita que el clic del botón navegue a la receta
-                            deleteRecipe(recipe.id);
-                        }); */
-
-                        /*  recipesContainer.appendChild(recipeCard); */
 
                         // Añadir el botón al contenedor
                         recipeCardContainer.appendChild(deleteButton);
 
+                        const editButton = document.createElement('button');
+                        editButton.textContent = 'Editar 🖊️';
+                        editButton.classList.add('edit-btn');
+                        editButton.dataset.id = recipe.id; // Asocia el ID de la receta al botón
+
+                        // Añadir el botón al contenedor
+                        recipeCardContainer.appendChild(editButton);
+
                     }
                     // Añadir la tarjeta al contenedor
                     recipeCardContainer.appendChild(recipeCard);
-                    // Añadir el contenedor al contenedor principal de recetas
+                    // Añadir el contenedor de la card al contenedor  principal de recetas
                     recipesContainer.appendChild(recipeCardContainer);
                 });
             }
@@ -78,7 +79,24 @@ function changeUserImage(image) {
 
     adminImg.src = image;
 }
+function generateRecipeUrl(recipeName) {
+    // Reemplaza los espacios por guiones, convierte a minúsculas y agrega la extensión .html
+    return recipeName.trim().toLowerCase().replace(/\s+/g, '-') + '.html';
+}
 
+// Genera un ID único para cada receta
+function generateUniqueId() {
+    return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+}
+// Función para mostrar un modal
+function showModal(modal) {
+    modal.classList.add('show');
+}
+
+// Función para ocultar un modal
+function hideModal(modal) {
+    modal.classList.remove('show');
+}
 
 // Para agregar nuevas recetas
 document.addEventListener("DOMContentLoaded", function () {
@@ -188,13 +206,14 @@ function deleteRecipe(recipeId) {
 }
 
 
-// modal Para eliminar nuevas recetas
+// modal Para eliminar recetas
 document.addEventListener("DOMContentLoaded", function () {
 
     // Obtiene los elementos del DOM para el modal
     const confirmDeleteModal = document.getElementById("confirmDeleteModal");
     const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
     const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    const span = document.getElementById("x");
     let confirmDeleteRecipeId = null; // Variable para almacenar el ID de la receta a eliminar
 
     // Maneja el clic en el botón de eliminar receta
@@ -209,8 +228,8 @@ document.addEventListener("DOMContentLoaded", function () {
             showModal(confirmDeleteModal);
         }
     });
-      // Maneja la confirmación de eliminación
-      confirmDeleteBtn.addEventListener('click', function () {
+    // Maneja la confirmación de eliminación
+    confirmDeleteBtn.addEventListener('click', function () {
         if (confirmDeleteRecipeId) {
             deleteRecipe(confirmDeleteRecipeId);
             hideModal(confirmDeleteModal);
@@ -222,36 +241,107 @@ document.addEventListener("DOMContentLoaded", function () {
         hideModal(confirmDeleteModal);
         confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
     });
-    span.addEventListener('click', function () {
+    // Cierra el modal cuando se hace clic en el span (x)
+    span.onclick = () => {
         hideModal(confirmDeleteModal);
         confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
-    });
-    window.addEventListener('click', function () {
-        hideModal(confirmDeleteModal);
-        confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
-    });
+    };
+
+    // Cierra el modal cuando se hace clic fuera de él
+    window.onclick = (event) => {
+        if (event.target == confirmDeleteModal) {
+            hideModal(confirmDeleteModal);
+            confirmDeleteRecipeId = null; // Limpia el ID de la receta a eliminar
+        }
+    };
 });
 
-function generateRecipeUrl(recipeName) {
-    // Reemplaza los espacios por guiones, convierte a minúsculas y agrega la extensión .html
-    return recipeName.trim().toLowerCase().replace(/\s+/g, '-') + '.html';
-}
+// Modal para editar recetas
+document.addEventListener("DOMContentLoaded", function () {
 
-// Genera un ID único para cada receta
-function generateUniqueId() {
-    return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-}
-// Función para mostrar un modal
-function showModal(modal) {
-    modal.classList.add('show');
-}
+    // Obtiene los elementos del DOM para el modal
+    const editRecipeModal = document.getElementById("editRecipeModal");
+    const closeEditModalBtn = document.getElementById("closeEdit");
+    const editRecipeForm = document.getElementById("editRecipeForm");
+    let editingRecipeId = null;
 
-// Función para ocultar un modal
-function hideModal(modal) {
-    modal.classList.remove('show');
-}
+    // Maneja el clic en el botón de editar receta
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('edit-btn')) {
+            const recipeId = event.target.dataset.id;
+            fetchRecipeData(recipeId); 
+        }
+    });
+
+    // Función para obtener los datos de la receta
+    function fetchRecipeData(recipeId) {
+        fetch(`/recipes/${recipeId}`)  // Asegúrate de que la ruta sea correcta
+            .then(response => response.json())
+            .then(recipe => {
+                // Prellena los campos del formulario con los datos de la receta
+                document.getElementById("editRecipeName").value = recipe.recipeName;
+                document.getElementById("editRecipeDescription").value = recipe.recipeDescription;
+                document.getElementById("editRecipeIngredients").value = recipe.recipeIngredients;
+                document.getElementById("editRecipeSteps").value = recipe.recipeSteps;
+                document.getElementById("editRecipeImage").value = recipe.recipeImage;
+
+                // Muestra el modal
+                showModal(editRecipeModal);
+                editingRecipeId = recipeId;  // Guarda el ID de la receta que estamos editando
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de la receta:', error);
+            });
+    }
+
+    // Maneja el cierre del modal
+    closeEditModalBtn.addEventListener('click', function () {
+        hideModal(editRecipeModal);
+        editingRecipeId = null;
+    });
+
+    // Manejador del envío del formulario de edición
+    editRecipeForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const updatedRecipe = {
+            recipeName: document.getElementById("editRecipeName").value,
+            recipeDescription: document.getElementById("editRecipeDescription").value,
+            recipeIngredients: document.getElementById("editRecipeIngredients").value,
+            recipeSteps: document.getElementById("editRecipeSteps").value,
+            recipeImage: document.getElementById("editRecipeImage").value
+        };
+
+        // Actualiza la receta en el servidor
+        fetch(`/recipes/${editingRecipeId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedRecipe)
+        })
+            .then(response => {
+                if (response.ok) {
+                    hideModal(editRecipeModal);
+                    location.reload();  // Recarga la página para reflejar los cambios
+                } else {
+                    console.error('Error al actualizar la receta');
+                }
+            });
+    });
+
+    // Cierra el modal cuando se hace clic fuera de él
+    window.onclick = function (event) {
+        if (event.target == editRecipeModal) {
+            hideModal(editRecipeModal);
+            editingRecipeId = null;
+        }
+    };
+});
+
 
 // Lógica para el modal de administrador
+
 document.addEventListener("DOMContentLoaded", function () {
     const adminBtn = document.getElementById("adminBtn");
     const adminModal = document.getElementById("adminModal");
@@ -326,7 +416,6 @@ document.addEventListener("DOMContentLoaded", function () {
         var modal = document.getElementById("verifiedModal");
         hideModal(verifiedModal);
     });
-
 
     // cerrar sesion
     logoutBtn.addEventListener("click", function () {

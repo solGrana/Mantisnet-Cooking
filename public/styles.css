@@ -209,7 +209,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el contenido horizontalmente */
-    position: relative; /* Necesario para el posicionamiento absoluto del botón */
+    position: relative; /* Necesario para el posicionamiento del botón */
 }
 
 /*  animation */
@@ -241,25 +241,57 @@ footer {
 }
 
 .delete-btn {
-    background-color: rgb(182, 1, 1);
+    background-color: rgba(163, 13, 13, 0.932);
     color: white;
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
-    margin-top: 10px;
-    border-radius: 8px;
-    z-index: 1; /* botón encima de la card */
-
+    border-radius: 50%;
+    z-index: 1; /* Asegura que el botón esté encima de la card */
+    font-size: 25px; /* Tamaño de la "X" */
+    
     position: absolute; /* Posiciona el botón en relación al contenedor */
-    bottom: 0px; /* Espacio desde el fondo del contenedor */
-    left: 50%; /* Centra el botón horizontalmente */
-    transform: translateX(-50%); /* Ajusta el botón para que esté centrado */
-}
+    top: 0px; /* Ajusta según sea necesario */
+    right: 0px; /* Ajusta según sea necesario */
+    
+    width: 30px; /* Tamaño del botón */
+    height: 30px; /* Tamaño del botón, igual que el ancho para que sea redondo */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones para color y tamaño */
+    }
 
 .delete-btn:hover {
     background-color: darkred;
+    transform: scale(1.05);
+
 }
 
+.edit-btn {
+    background-color: none;
+    color: rgb(136, 136, 136);
+    border: none;
+    cursor: pointer;
+    z-index: 1; /* Asegura que el botón esté encima de la card */
+    
+    position: absolute; /* Posiciona el botón en relación al contenedor */
+    bottom: 10px; /* Ajusta la distancia desde el borde inferior */
+    right: 10px; /* Ajusta la distancia desde el borde derecho */
+    
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-style: italic; /* Aplica cursiva al texto */
+}
+
+.edit-btn:hover {
+    color: rgb(41, 38, 38);
+    transform: scale(1.05);
+}
 
 footer {
     color: #FFFFFF;

@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         deleteButton.innerHTML = '&times;';
                         deleteButton.classList.add('delete-btn');
                         deleteButton.dataset.id = recipe.id; // Asocia el ID de la receta al botón
+                        deleteButton.dataset.recipeName = recipe.recipeName
 
                         // Añadir el botón al contenedor
                         recipeCardContainer.appendChild(deleteButton);
@@ -211,20 +212,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Obtiene los elementos del DOM para el modal
     const confirmDeleteModal = document.getElementById("confirmDeleteModal");
+    const deleteMessage = document.getElementById('deleteMessage');
     const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
     const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
     const span = document.getElementById("x");
     let confirmDeleteRecipeId = null; // Variable para almacenar el ID de la receta a eliminar
+    let confirmDeleteRecipeName = null; // nombre de la receta
 
     // Maneja el clic en el botón de eliminar receta
     document.addEventListener('click', function (event) {
         if (event.target.classList.contains('delete-btn')) {
             const recipeId = event.target.dataset.id;
-            showConfirmDeleteModal(recipeId);
+            const recipeName = event.target.dataset.recipeName;
+            showConfirmDeleteModal(recipeId, recipeName);
         }
         // Muestra el modal de confirmación de eliminación y almacena el ID de la receta
-        function showConfirmDeleteModal(recipeId) {
+        function showConfirmDeleteModal(recipeId, recipeName) {
             confirmDeleteRecipeId = recipeId; // Almacena el ID de la receta a eliminar
+            confirmDeleteRecipeName = recipeName;
+            deleteMessage.textContent = `¿Estás seguro que querés eliminar la receta "${recipeName}"?`; // Actualiza el mensaje del modal con el nombre de la receta
             showModal(confirmDeleteModal);
         }
     });

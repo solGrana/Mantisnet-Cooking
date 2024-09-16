@@ -1,75 +1,80 @@
-//CARGA DE RECETAS DESDE POSTGRESQL
+SCRIPTS.JS
+
 document.addEventListener("DOMContentLoaded", function () {
     const isAdmin = localStorage.getItem('adminAccess');
-
-    fetch('/recipes')
-        .then(response => response.json())
+    // Realiza una petición para obtener el archivo JSON con las recetas
+    fetch('recipes.json')
+        .then(response => response.json()) // Convierte la respuesta a JSON
         .then(data => {
-            console.log(data);  // Verifica la estructura de los datos recibidos
-
+            // Obtiene los elementos del DOM para el dropdown y el contenedor de recetas
             const recipeDropdown = document.getElementById('recipe-dropdown');
             const recipesContainer = document.getElementById('recipes-container');
             const searchBar = document.getElementById('searchBar');
 
+            // Función para mostrar las recetas en el dropdown y en tarjetas en la pagina
             function displayRecipes(filteredRecipes) {
-                if (!Array.isArray(filteredRecipes)) {
-                    console.error('Error: filteredRecipes no es un array:', filteredRecipes);
-                    return;
-                }
-
-                recipesContainer.innerHTML = '';
+                recipesContainer.innerHTML = ''; // Limpia el contenedor de recetas
                 filteredRecipes.forEach(recipe => {
+                    // Crea un link para el dropdown y agrega la receta al dropdown
                     const dropdownLink = document.createElement('a');
                     dropdownLink.href = `recipeTemplate.html?id=${recipe.id}`;
-                    dropdownLink.textContent = recipe.recipename;
+                    dropdownLink.textContent = recipe.recipeName;
                     recipeDropdown.appendChild(dropdownLink);
 
+                    // Crea un container para la card y el deleteBTN
                     const recipeCardContainer = document.createElement('div');
                     recipeCardContainer.classList.add('recipe-card-container');
 
+                    // Crea una tarjeta de receta y agrega la receta al contenedor de recetas
                     const recipeCard = document.createElement('a');
                     recipeCard.href = `recipeTemplate.html?id=${recipe.id}`;
                     recipeCard.classList.add('recipe-card');
                     recipeCard.innerHTML = `
-                        <img src="${recipe.recipeimage}" alt="${recipe.recipeimage}">
-                        <h2>${recipe.recipename}</h2>
-                        <p>${recipe.recipedescription}</p>
-                    `;
-
+                <img src="${recipe.recipeImage}" alt="${recipe.recipeImage}">
+                <h2>${recipe.recipeName}</h2>
+                <p>${recipe.recipeDescription}</p>
+                `;
+                    // Agrega el boton de eliminar y editar solo si el usuario está autenticado como administrador
                     if (isAdmin) {
                         const deleteButton = document.createElement('button');
                         deleteButton.innerHTML = '&times;';
                         deleteButton.classList.add('delete-btn');
-                        deleteButton.dataset.id = recipe.id;
-                        deleteButton.dataset.recipename = recipe.recipename;
+                        deleteButton.dataset.id = recipe.id; // Asocia el ID de la receta al botón
+                        deleteButton.dataset.recipeName = recipe.recipeName
+
+                        // Añadir el botón al contenedor
                         recipeCardContainer.appendChild(deleteButton);
 
                         const editButton = document.createElement('button');
                         editButton.textContent = 'Editar 🖊️';
                         editButton.classList.add('edit-btn');
-                        editButton.dataset.id = recipe.id;
-                        recipeCardContainer.appendChild(editButton);
-                    }
+                        editButton.dataset.id = recipe.id; // Asocia el ID de la receta al botón
 
+                        // Añadir el botón al contenedor
+                        recipeCardContainer.appendChild(editButton);
+
+                    }
+                    // Añadir la tarjeta al contenedor
                     recipeCardContainer.appendChild(recipeCard);
+                    // Añadir el contenedor de la card al contenedor  principal de recetas
                     recipesContainer.appendChild(recipeCardContainer);
                 });
             }
 
-            displayRecipes(data.recipes || data);  // Maneja la posible estructura de datos
+            displayRecipes(data.recipes); // Muestra todas las recetas al cargar la página
 
+            // Filtra las recetas mientras el usuario escribe en la search bar
             searchBar.addEventListener('input', function () {
                 const filter = this.value.toLowerCase();
                 const filteredRecipes = data.recipes.filter(recipe =>
-                    recipe.recipename.toLowerCase().includes(filter) ||
-                    recipe.recipedescription.toLowerCase().includes(filter)
+                    recipe.recipeName.toLowerCase().includes(filter) ||
+                    recipe.recipeDescription.toLowerCase().includes(filter)
                 );
-                displayRecipes(filteredRecipes);
+                displayRecipes(filteredRecipes); // Muestra solo las recetas que coinciden con el filtro
             });
         })
         .catch(error => console.error('Error fetching recipes:', error));
-});
-//FIN CARGA RECETAS
+}); 
 
 function changeUserImage(image) {
     const admiBtn = document.getElementById('adminBtn');
@@ -131,17 +136,12 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display = "none";
         }
     };
-   /*  // Obtiene los datos del formulario y agrega la nueva receta al JSON
+    // Obtiene los datos del formulario y agrega la nueva receta al JSON
     const getData = (form) => {
         const formData = new FormData(form); // Crea un objeto FormData con los datos del formulario
         const data = {};
         formData.forEach((value, key) => {
-            if (key === 'recipeImageFile') {
-                // La imagen se maneja por separado
-                data[key] = value;
-            } else {
-                data[key] = value;
-            }
+            data[key] = value;
         });
         data.url = generateRecipeUrl(data.recipeName); // Generar URL automáticamente
         data.id = generateUniqueId(); // Generar un ID unico para la receta
@@ -149,62 +149,27 @@ document.addEventListener("DOMContentLoaded", function () {
         return data;
     };
 
-    //AGREGAR NUEVAS RECETAS EN POSTGRE / Envia la nueva receta al servidor
-
+    // Envia la nueva receta al servidor
      const postData = async () => {
         const newRecipe = getData(form);
         try {
-            const response = await fetch('/recipes', {  // La ruta a tu servidor
+            const response = await fetch('/recipes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                 // body: JSON.stringify(newRecipe) Enviar los datos como JSON
+                body: JSON.stringify(newRecipe)
             });
             if (response.ok) {
                 const jsonResponse = await response.json();
                 console.log('Recipe added:', jsonResponse);
-                location.reload();  // Recargar para ver la nueva receta
+                location.reload(); // Recargar para ver la nueva receta
             } else {
                 const errorResponse = await response.text();
-                console.error('Error response:', errorResponse);
+                console.error('Error response:', errorResponse); // Muestra errores en la consola si falla
             }
         } catch (error) {
             console.log('Error:', error);
         }
-    };  */
-
-    // Obtiene los datos del formulario y agrega la nueva receta
-const getData = (form) => {
-    const formData = new FormData(form); // Usar FormData para incluir archivos e información
-    formData.append('url', generateRecipeUrl(formData.get('recipeName'))); // Generar URL automáticamente
-    formData.append('id', generateUniqueId()); // Generar un ID único
-    return formData; // Retorna el FormData
-};
-
-// Enviar la nueva receta al servidor
-const postData = async () => {
-    const form = document.querySelector('#recipeForm'); // Asegúrate de tener el ID del formulario correcto
-    const formData = getData(form);
-
-    try {
-        const response = await fetch('/recipes', {  // Ruta a tu servidor
-            method: 'POST',
-            body: formData // Enviar el FormData, no hace falta especificar el Content-Type
-        });
-
-        if (response.ok) {
-            const jsonResponse = await response.json();
-            console.log('Recipe added:', jsonResponse);
-            location.reload();  // Recargar para ver la nueva receta
-        } else {
-            const errorResponse = await response.text();
-            console.error('Error response:', errorResponse);
-        }
-    } catch (error) {
-        console.log('Error:', error);
-    }
-};
-
-    //FIN AGREGA RECETAS
+    }; 
 
     // Maneja el evento de envío del formulario
     form.addEventListener('submit', (e) => {
@@ -213,7 +178,6 @@ const postData = async () => {
     });
 });
 
-// FUNCION PARA ELIMINAR RECETAS EN POSTGRESQL
 function deleteRecipe(recipeId) {
     fetch(`/recipes/${recipeId}`, {
         method: 'DELETE',
@@ -221,22 +185,28 @@ function deleteRecipe(recipeId) {
     })
         .then(response => {
             if (response.ok) {
+                // Encuentra el botón de eliminar en el DOM
                 const deleteButton = document.querySelector(`.delete-btn[data-id="${recipeId}"]`);
                 if (deleteButton) {
+                    // Encuentra el contenedor de la tarjeta o la tarjeta misma
                     const recipeCardContainer = deleteButton.closest('.recipe-card-container');
                     if (recipeCardContainer) {
-                        recipeCardContainer.remove();  // Eliminar la tarjeta
+                        recipeCardContainer.remove(); // Elimina el contenedor de la tarjeta
+                    } else {
+                        console.error('Contenedor de la tarjeta no encontrado');
                     }
+                } else {
+                    console.error('Botón de eliminar no encontrado');
                 }
             } else {
-                console.error('Error al eliminar la receta:', response.statusText);
+                console.error('Error al eliminar la receta', response.statusText);
             }
         })
         .catch(error => {
             console.error('Error en la solicitud de eliminación:', error);
+            alert('Error al eliminar la receta');
         });
-}
-//FIN ELIMINAR RECETAS EN POSTGRESQL
+} 
 
 // modal Para eliminar recetas
 document.addEventListener("DOMContentLoaded", function () {
@@ -254,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('click', function (event) {
         if (event.target.classList.contains('delete-btn')) {
             const recipeId = event.target.dataset.id;
-            const recipeName = event.target.dataset.recipename;
+            const recipeName = event.target.dataset.recipeName;
             showConfirmDeleteModal(recipeId, recipeName);
         }
         // Muestra el modal de confirmación de eliminación y almacena el ID de la receta
@@ -316,10 +286,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(recipe => {
                 // Prellena los campos del formulario con los datos de la receta
-                document.getElementById("editRecipeName").value = recipe.recipename; // Ajustado aquí
-                document.getElementById("editRecipeDescription").value = recipe.recipedescription; // Ajustado aquí
-                document.getElementById("editRecipeIngredients").value = recipe.recipeingredients; // Ajustado aquí
-                document.getElementById("editRecipeSteps").value = recipe.recipesteps; // Ajustado aquí
+                document.getElementById("editRecipeName").value = recipe.recipename; // Ajustado aca REMPLAZAR LA PRIMER LETRA DE LA SEGUNDA PALABRA A MAYUSCULA PARA QUE FUNCIONE EN JSON
+                document.getElementById("editRecipeDescription").value = recipe.recipedescription; // Ajustado aca
+                document.getElementById("editRecipeIngredients").value = recipe.recipeingredients; // Ajustado aca
+                document.getElementById("editRecipeSteps").value = recipe.recipesteps; // Ajustado aca
                 document.getElementById("editRecipeImage").value = recipe.recipeimage || ''; // Asegúrate de que esta propiedad exista si la estás usando
     
                 // Muestra el modal
@@ -330,17 +300,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error al obtener los datos de la receta:', error);
             });
     }
+    
 
     // Maneja el cierre del modal
     closeEditModalBtn.addEventListener('click', function () {
         hideModal(editRecipeModal);
         editingRecipeId = null;
     });
-    
-    //EDITAR RECETAS EN POSTGRESQL // Manejador del envío del formulario de edición
-    editRecipeForm.addEventListener("submit", function (e) {
+
+    // Manejador del envío del formulario de edición
+     editRecipeForm.addEventListener("submit", function (e) {
         e.preventDefault();
-    
+
         const updatedRecipe = {
             recipeName: document.getElementById("editRecipeName").value,
             recipeDescription: document.getElementById("editRecipeDescription").value,
@@ -348,8 +319,8 @@ document.addEventListener("DOMContentLoaded", function () {
             recipeSteps: document.getElementById("editRecipeSteps").value,
             recipeImage: document.getElementById("editRecipeImage").value
         };
-    
-        // Enviar la receta editada al servidor
+
+        // Actualiza la receta en el servidor
         fetch(`/recipes/${editingRecipeId}`, {
             method: 'PUT',
             headers: {
@@ -360,16 +331,12 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => {
                 if (response.ok) {
                     hideModal(editRecipeModal);
-                    location.reload();  // Recargar la página para ver los cambios
+                    location.reload();  // Recarga la página para reflejar los cambios
                 } else {
                     console.error('Error al actualizar la receta');
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
             });
-    });
-    //FIN EDITAR RECETAS EN POSTGRESQL
+    }); 
 
     // Cierra el modal cuando se hace clic fuera de él
     window.onclick = function (event) {
@@ -379,7 +346,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 });
-
 
 // Lógica para el modal de administrador
 
@@ -469,3 +435,84 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.reload(); // Recarga la página para reflejar los cambios
     });
 }); 
+
+
+RECIPE.JS
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Realiza una petición para obtener el archivo JSON con las recetas
+    fetch('recipes.json')
+        .then(response => response.json()) // Convierte la respuesta a JSON
+        .then(recipes => {
+            // Obtiene los elementos del DOM para el dropdown y el contenedor de recetas
+            const recipeDropdown = document.getElementById('recipe-dropdown');
+            const recipesContainer = document.getElementById('recipes-container');
+
+            recipes.recipes.forEach(recipe => {
+                // Crea un link para el dropdown y agrega la receta al dropdown
+                const dropdownLink = document.createElement('a');
+                dropdownLink.href = `recipeTemplate.html?id=${recipe.id}`; // CAMBIE EL RECIPE.URL
+                dropdownLink.textContent = recipe.recipeName;
+                recipeDropdown.appendChild(dropdownLink);
+            });
+        })
+        .catch(error => console.error('Error fetching recipes:', error));
+});
+
+
+// Función para obtener parámetros de la URL
+function getQueryParams() {
+    const params = {};
+    window.location.search.substring(1).split('&').forEach(param => {
+        const [key, value] = param.split('=');
+        params[key] = decodeURIComponent(value);
+    });
+    return params;
+}
+
+// Función para cargar la receta
+function loadRecipe(id) {
+    fetch('recipes.json')
+        .then(response => response.json())
+        .then(recipes => {
+            const recipe = recipes.recipes.find(r => r.id == id);
+            if (recipe) {
+                document.getElementById('recipeName').textContent = recipe.recipeName;
+                document.getElementById('recipeImage').src = recipe.recipeImage;
+                document.getElementById('recipeName').alt = recipe.recipeName;
+                document.getElementById('recipeDescription').textContent = recipe.recipeDescription;
+
+                // Mostrar los ingredientes con checkbox
+                const ingredientsList = document.getElementById('recipeIngredients');
+                ingredientsList.innerHTML = '';
+                recipe.recipeIngredients.split(',').forEach(ingredient => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                           <input type="checkbox" class="ingredient-checkbox">
+                           ${ingredient.trim()}
+                       `;
+                    ingredientsList.appendChild(li);
+                });
+                const recipeSteps = document.getElementById('recipeSteps');
+                recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
+
+            } else {
+                document.body.innerHTML = '<h1>Receta no encontrada</h1>';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching recipe:', error);
+            document.body.innerHTML = '<h1>Error al cargar la receta</h1>';
+        });
+}
+
+
+// Cargar la receta al cargar la página
+window.onload = function () {
+    const params = getQueryParams();
+    if (params.id) {
+        loadRecipe(params.id);
+    } else {
+        document.body.innerHTML = '<h1>ID de receta no proporcionado</h1>';
+    }
+};

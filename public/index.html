@@ -39,7 +39,7 @@
         </nav>
     </header>
     <main>
-        <h1 class="titulo">Mantisnet cooking</h1>
+        <h1 class="titulo">MantisNet Cooking</h1>
         <h2 class="subtitulo">Recetas como la gente</h2>
         <div class="content-container">
             <!-- <div class="advertisement">Publicidad</div> -->
@@ -80,8 +80,9 @@
                     <textarea id="recipeSteps" name="recipeSteps" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="recipeImage">URL de la imagen:</label>
-                    <input type="text" id="recipeImage" name="recipeImage">
+                    <label for="recipeImage">Subir imagen:</label>
+                    <!-- <input type="text" id="recipeImage" name="recipeImage"> -->
+                    <input type="file" id="recipeImage" name="recipeImage" accept="image/*">
                 </div>
                 <button type="submit" id="modalAddRecipeBtn">Agregar Receta</button>
             </form>

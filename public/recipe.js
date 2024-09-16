@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Realiza una petición para obtener el archivo JSON con las recetas
-    fetch('recipes.json')
+    // Realiza una petición para obtener las recetas desde el servidor
+    fetch('/recipes')  // Asegúrate de que esta ruta sea la correcta para obtener todas las recetas
         .then(response => response.json()) // Convierte la respuesta a JSON
         .then(recipes => {
             // Obtiene los elementos del DOM para el dropdown y el contenedor de recetas
             const recipeDropdown = document.getElementById('recipe-dropdown');
             const recipesContainer = document.getElementById('recipes-container');
 
-            recipes.recipes.forEach(recipe => {
+            recipes.forEach(recipe => {
                 // Crea un link para el dropdown y agrega la receta al dropdown
                 const dropdownLink = document.createElement('a');
                 dropdownLink.href = `recipeTemplate.html?id=${recipe.id}`; // CAMBIE EL RECIPE.URL
-                dropdownLink.textContent = recipe.recipeName;
+                dropdownLink.textContent = recipe.recipename;
                 recipeDropdown.appendChild(dropdownLink);
             });
         })
@@ -31,30 +31,35 @@ function getQueryParams() {
 
 // Función para cargar la receta
 function loadRecipe(id) {
-    fetch('recipes.json')
+    fetch(`/recipes/${id}`)
         .then(response => response.json())
-        .then(recipes => {
-            const recipe = recipes.recipes.find(r => r.id == id);
+        .then(recipe => {
             if (recipe) {
-                document.getElementById('recipeName').textContent = recipe.recipeName;
-                document.getElementById('recipeImage').src = recipe.recipeImage;
-                document.getElementById('recipeName').alt = recipe.recipeName;
-                document.getElementById('recipeDescription').textContent = recipe.recipeDescription;
+                document.getElementById('recipeName').textContent = recipe.recipename || 'No name available'; // Cambia recipeName por recipename
+                document.getElementById('recipeImage').src = recipe.recipeimage || '';
+                document.getElementById('recipeName').alt = recipe.recipename || 'No name available'; // Cambia recipeName por recipename
+                document.getElementById('recipeDescription').textContent = recipe.recipedescription || 'No description available'; // Cambia recipeDescription por recipedescription
 
                 // Mostrar los ingredientes con checkbox
                 const ingredientsList = document.getElementById('recipeIngredients');
                 ingredientsList.innerHTML = '';
-                recipe.recipeIngredients.split(',').forEach(ingredient => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                           <input type="checkbox" class="ingredient-checkbox">
-                           ${ingredient.trim()}
-                       `;
-                    ingredientsList.appendChild(li);
-                });
-                const recipeSteps = document.getElementById('recipeSteps');
-                recipeSteps.innerHTML = recipe.recipeSteps.replace(/\n/g, '<br>'); // Reemplazar saltos de línea por <br> para HTML}
+                
+                // Verificar si recipe.recipeIngredients está definido
+                if (recipe.recipeingredients) { // Cambia recipeIngredients por recipeingredients
+                    recipe.recipeingredients.split(',').forEach(ingredient => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                               <input type="checkbox" class="ingredient-checkbox">
+                               ${ingredient.trim()}
+                           `;
+                        ingredientsList.appendChild(li);
+                    });
+                } else {
+                    ingredientsList.innerHTML = '<li>No ingredients found</li>';
+                }
 
+                const recipeSteps = document.getElementById('recipeSteps');
+                recipeSteps.innerHTML = recipe.recipesteps ? recipe.recipesteps.replace(/\n/g, '<br>') : 'No steps found'; // Cambia recipeSteps por recipesteps
             } else {
                 document.body.innerHTML = '<h1>Receta no encontrada</h1>';
             }

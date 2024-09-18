@@ -295,6 +295,12 @@ app.put('/recipes/:id', async (req, res) => {
     }
 });
 
+// Ruta para obtener la contraseña de administrador
+app.get('/admin-password', (req, res) => {
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    res.json({ password: adminPassword });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

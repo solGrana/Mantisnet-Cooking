@@ -1,4 +1,4 @@
-const { Pool } = require('pg');
+ const { Pool } = require('pg');
 require('dotenv').config(); // Cargar variables de entorno desde .env
 
 // Configura tu conexión a PostgreSQL usando variables de entorno
@@ -11,3 +11,4 @@ const pool = new Pool({
 });
 
 module.exports = pool;
+ 

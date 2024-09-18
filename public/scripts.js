@@ -397,21 +397,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     // lógica para verificar la contraseña de administrador (TEST)
-    adminForm.addEventListener("submit", function (e) {
+    adminForm.addEventListener("submit", async function (e) {
         e.preventDefault();
         const adminPassword = document.getElementById("adminPassword").value;
-        const correctPassword = "s"; // Verificar la contraseña (hardcodeada para testing)
-        
+       // const correctPassword = "s";  Verificar la contraseña (hardcodeada para testing)
+       try {
+        // Hacer una solicitud al backend para obtener la contraseña
+        const response = await fetch('/admin-password');
+        const data = await response.json();
+        const correctPassword = data.password;
+
         if (adminPassword === correctPassword) {
-            document.getElementById('addRecipeBtn').style.display = 'block';// Contraseña correcta, habilitar el botón de agregar receta
-            hideModal(adminModal); // Cierra el modal 
-            showVerifiedModal() // Abre el modal de usuario verificado
+            document.getElementById('addRecipeBtn').style.display = 'block';
+            hideModal(adminModal); 
+            showVerifiedModal(); 
             changeUserImage('images/verifiedUs2.png');
-            localStorage.setItem('adminAccess', 'true'); // Guardar estado en localStorage
-            window.location.reload(); // Recarga la página para reflejar los cambios
+            localStorage.setItem('adminAccess', 'true');
+            window.location.reload();
         } else {
             alert("Contraseña incorrecta. Inténtelo de nuevo.");
         }
+    } catch (error) {
+        console.error("Error al obtener la contraseña:", error);
+    }
     });
     
     document.getElementById("okBtn").addEventListener("click", function () {

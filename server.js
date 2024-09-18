@@ -155,6 +155,8 @@ const cors = require('cors'); // Para manejar solicitudes CORS
 const pool = require('./dbConfig'); // Importar configuración de la base de datos
 const multer = require('multer');//para que los usuarios puedan subir imagenes
 const fs = require('fs-extra'); // Importar fs-extra
+require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;

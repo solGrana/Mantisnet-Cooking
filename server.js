@@ -222,28 +222,14 @@ app.get('/recipes/:id', async (req, res) => {
     }
 });
 
-// Ruta para agregar una receta
-/* app.post('/recipes', async (req, res) => {
-    const { recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url, id } = req.body;
-    try {
-        const result = await pool.query(
-            'INSERT INTO recipes (recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url, id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-            [recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url, id]
-        );
-        res.status(201).json(result.rows[0]);
-    } catch (err) {
-        console.error('Error al agregar receta:', err);
-        res.status(500).send('Error al agregar receta');
-    }
-}); */
 
 app.post('/recipes', upload.single('recipeImage'), async (req, res) => {
-    const { recipeName, recipeDescription, recipeIngredients, recipeSteps, url, id } = req.body;
+    const { recipeName, recipeDescription, recipeIngredients, recipeSteps, id } = req.body;
     const recipeImage = req.file ? `images/${req.file.filename}` : null; // Obtener el nombre del archivo subido
     try {
         const result = await pool.query(
-            'INSERT INTO recipes (recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url, id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-            [recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url, id]
+            'INSERT INTO recipes (recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            [recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, id]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -252,20 +238,6 @@ app.post('/recipes', upload.single('recipeImage'), async (req, res) => {
     }
 });
 
-// Ruta para eliminar una receta
-/* app.delete('/recipes/:id', async (req, res) => {
-    const recipeId = req.params.id;
-    try {
-        const result = await pool.query('DELETE FROM recipes WHERE id = $1 RETURNING *', [recipeId]);
-        if (result.rowCount === 0) {
-            return res.status(404).send('Receta no encontrada');
-        }
-        res.status(200).send('Receta eliminada con éxito');
-    } catch (err) {
-        console.error('Error al eliminar receta:', err);
-        res.status(500).send('Error al eliminar receta');
-    }
-}); */
 app.delete('/recipes/:id', async (req, res) => {
     const recipeId = req.params.id;
     try {
@@ -307,11 +279,11 @@ app.delete('/recipes/:id', async (req, res) => {
 // Ruta para editar una receta existente
 app.put('/recipes/:id', async (req, res) => {
     const recipeId = req.params.id;
-    const { recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url } = req.body;
+    const { recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage} = req.body;
     try {
         const result = await pool.query(
-            'UPDATE recipes SET recipeName = $1, recipeDescription = $2, recipeIngredients = $3, recipeSteps = $4, recipeImage = $5, url = $6 WHERE id = $7 RETURNING *',
-            [recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, url, recipeId]
+            'UPDATE recipes SET recipeName = $1, recipeDescription = $2, recipeIngredients = $3, recipeSteps = $4, recipeImage = $5 WHERE id = $6 RETURNING *',
+            [recipeName, recipeDescription, recipeIngredients, recipeSteps, recipeImage, recipeId]
         );
         if (result.rows.length === 0) {
             return res.status(404).send('Receta no encontrada');

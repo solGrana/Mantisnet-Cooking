@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.png" type="image/png">
 
     <script src="scripts.js"></script>
 </head>
 
 <body>
-    <header>
+     <header>
         <nav>
             <a href="index.html" class="logo">
                 <img src="images/InvertedLogo.png" alt="Logo">
@@ -37,134 +38,134 @@
                 </a>
             </div>
         </nav>
-    </header>
-    <main>
-        <h1 class="titulo">MantisNet Cooking</h1>
-        <h2 class="subtitulo">Recetas como la gente</h2>
-        <div class="content-container">
-            <!-- <div class="advertisement">Publicidad</div> -->
-            <div id="recipes-container" class="recipes-container"></div>
-        </div>
-        <button id="addRecipeBtn">+</button>
-    </main>
-    <footer>
-        <div class="social-icons">
-            <a href="https://www.tiktok.com/@moodmorfi?_t=8nwOC2KfsEH&_r=1" class="tiktok">
-                <img src="images/tiktok.png" alt="tiktok">
-            </a>
-        </div>
-        <p>&copy; 2024 Mantisnet </p>
-    </footer>
-
-    <!-- Modal for adding a new recipe -->
-    <div id="recipeModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Agregar Nueva Receta</h2>
-            <form id="recipeForm">
-                <div class="form-group">
-                    <label for="recipeName">Nombre de la receta:</label>
-                    <input type="text" id="recipeName" name="recipeName" required>
+    </header> 
+            <main>
+                <h1 class="titulo">MantisNet Cooking</h1>
+                <h2 class="subtitulo">Recetas como la gente</h2>
+                <div class="content-container">
+                    <!-- <div class="advertisement">Publicidad</div> -->
+                    <div id="recipes-container" class="recipes-container"></div>
                 </div>
-                <div class="form-group">
-                    <label for="recipeDescription">Descripción breve:</label>
-                    <textarea id="recipeDescription" name="recipeDescription" required></textarea>
+                <button id="addRecipeBtn">+</button>
+            </main>
+            <footer>
+                <div class="social-icons">
+                    <a href="https://www.tiktok.com/@moodmorfi?_t=8nwOC2KfsEH&_r=1" class="tiktok">
+                        <img src="images/tiktok.png" alt="tiktok">
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="recipeIngredients">Ingredientes:</label>
-                    <textarea id="recipeIngredients" name="recipeIngredients"
-                        placeholder="Ejemplo: 1 taza de azúcar, 2 huevos... (separado por comas)" required></textarea>
+                <p>&copy; 2024 Mantisnet </p>
+            </footer>
+
+            <!-- Modal for adding a new recipe -->
+            <div id="recipeModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Agregar Nueva Receta</h2>
+                    <form id="recipeForm">
+                        <div class="form-group">
+                            <label for="recipeName">Nombre de la receta:</label>
+                            <input type="text" id="recipeName" name="recipeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeDescription">Descripción breve:</label>
+                            <textarea id="recipeDescription" name="recipeDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeIngredients">Ingredientes:</label>
+                            <textarea id="recipeIngredients" name="recipeIngredients"
+                                placeholder="Ejemplo: 1 taza de azúcar, 2 huevos... (separado por comas)"
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeSteps">Paso a paso:</label>
+                            <textarea id="recipeSteps" name="recipeSteps" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeImage">Subir imagen:</label>
+                            <!-- <input type="text" id="recipeImage" name="recipeImage"> -->
+                            <input type="file" id="recipeImage" name="recipeImage" accept="image/*">
+                        </div>
+                        <button type="submit" id="modalAddRecipeBtn">Agregar Receta</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="recipeSteps">Paso a paso:</label>
-                    <textarea id="recipeSteps" name="recipeSteps" required></textarea>
+            </div>
+
+            <!-- Modal for administrator authentication -->
+            <div id="adminModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>¿Sos Administrador?</h2>
+                    <form id="adminForm">
+                        <div class="form-group">
+                            <label for="adminPassword">Ingresa tu clave:</label>
+                            <input type="password" id="adminPassword" name="adminPassword" required>
+                        </div>
+                        <button type="submit" id="submitAdminBtn">Ingresar</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="recipeImage">Subir imagen:</label>
-                    <!-- <input type="text" id="recipeImage" name="recipeImage"> -->
-                    <input type="file" id="recipeImage" name="recipeImage" accept="image/*">
+            </div>
+
+
+            <!-- Modal for verified users -->
+            <div id="verifiedModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <!-- Verified Admin text -->
+                    <p id="adminVerifiedText">Administrador verificado ✔ </p>
+
+                    <div class="button-container">
+                        <button id="logoutBtn">Log Out</button>
+                        <button id="okBtn">Aceptar</button>
+                    </div>
+
                 </div>
-                <button type="submit" id="modalAddRecipeBtn">Agregar Receta</button>
-            </form>
-        </div>
-    </div>
+            </div>
 
-    <!-- Modal for administrator authentication -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>¿Sos Administrador?</h2>
-            <form id="adminForm">
-                <div class="form-group">
-                    <label for="adminPassword">Ingresa tu clave:</label>
-                    <input type="password" id="adminPassword" name="adminPassword" required>
+            <!-- Modal for recipe elimination confirmation -->
+            <div id="confirmDeleteModal" class="modal">
+                <div class="modal-content">
+                    <span id="x" class="close">&times;</span>
+                    <h2 id="deleteMessage">¿Estás seguro de que queres eliminar esta receta?</h2>
+                    <div class="button-container">
+                        <button id="confirmDeleteBtn">Sí, eliminar</button>
+                        <button id="cancelDeleteBtn">Cancelar</button>
+                    </div>
                 </div>
-                <button type="submit" id="submitAdminBtn">Ingresar</button>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- Modal for verified users -->
-    <div id="verifiedModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <!-- Verified Admin text -->
-            <p id="adminVerifiedText" >Administrador verificado ✔ </p>
-
-            <div class="button-container">
-                <button id="logoutBtn">Log Out</button>
-                <button id="okBtn">Aceptar</button>
             </div>
 
-        </div>
-    </div>
-
-    <!-- Modal for recipe elimination confirmation -->
-    <div id="confirmDeleteModal" class="modal">
-        <div class="modal-content">
-            <span id="x" class="close">&times;</span>
-            <h2 id="deleteMessage">¿Estás seguro de que queres eliminar esta receta?</h2>
-            <div class="button-container">
-                <button id="confirmDeleteBtn">Sí, eliminar</button>
-                <button id="cancelDeleteBtn">Cancelar</button>
+            <!-- Modal for editing existing recipe -->
+            <div id="editRecipeModal" class="modal">
+                <div class="modal-content">
+                    <span id="closeEdit" class="close">&times;</span>
+                    <h2>Editar Receta</h2>
+                    <form id="editRecipeForm">
+                        <div class="form-group">
+                            <label for="editRecipeName">Nombre de la receta:</label>
+                            <input type="text" id="editRecipeName" name="recipeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRecipeDescription">Descripción breve:</label>
+                            <textarea id="editRecipeDescription" name="recipeDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRecipeIngredients">Ingredientes:</label>
+                            <textarea id="editRecipeIngredients" name="recipeIngredients"
+                                placeholder="Ejemplo: 1 taza de azúcar, 2 huevos... (separado por comas)"
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRecipeSteps">Paso a paso:</label>
+                            <textarea id="editRecipeSteps" name="recipeSteps" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRecipeImage">URL de la imagen:</label>
+                            <input type="text" id="editRecipeImage" name="recipeImage">
+                        </div>
+                        <button type="submit" id="updateRecipeBtn">Actualizar Receta</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal for editing existing recipe -->
-<div id="editRecipeModal" class="modal">
-    <div class="modal-content">
-        <span id="closeEdit"  class="close">&times;</span>
-        <h2>Editar Receta</h2>
-        <form id="editRecipeForm">
-            <div class="form-group">
-                <label for="editRecipeName">Nombre de la receta:</label>
-                <input type="text" id="editRecipeName" name="recipeName" required>
-            </div>
-            <div class="form-group">
-                <label for="editRecipeDescription">Descripción breve:</label>
-                <textarea id="editRecipeDescription" name="recipeDescription" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="editRecipeIngredients">Ingredientes:</label>
-                <textarea id="editRecipeIngredients" name="recipeIngredients"
-                    placeholder="Ejemplo: 1 taza de azúcar, 2 huevos... (separado por comas)" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="editRecipeSteps">Paso a paso:</label>
-                <textarea id="editRecipeSteps" name="recipeSteps" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="editRecipeImage">URL de la imagen:</label>
-                <input type="text" id="editRecipeImage" name="recipeImage">
-            </div>
-            <button type="submit" id="updateRecipeBtn">Actualizar Receta</button>
-        </form>
-    </div>
-</div>
-
-    
 
 </body>
 

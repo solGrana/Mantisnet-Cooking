@@ -61,10 +61,19 @@ document.addEventListener("DOMContentLoaded", function () {
             
             searchBar.addEventListener('input', function () {
                 const filter = this.value.toLowerCase();
+
+                const recipesArray = data.recipes || data; // Maneja ambas posibilidades
+               /*  
                 const filteredRecipes = data.recipes.filter(recipe =>
                     recipe.recipename.toLowerCase().includes(filter) ||
                     recipe.recipedescription.toLowerCase().includes(filter)
+                ); */
+
+                const filteredRecipes = recipesArray.filter(recipe =>
+                    recipe.recipename.toLowerCase().includes(filter) ||
+                    recipe.recipedescription.toLowerCase().includes(filter)
                 );
+
                 displayRecipes(filteredRecipes);
             });
         })
@@ -72,16 +81,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     //FIN CARGA RECETAS
     
-    function changeUserImage(image) {
+function changeUserImage(image) {
     const adminBtn = document.getElementById('adminBtn');
     const adminImg = adminBtn.querySelector('img');
-    
+
     adminImg.src = image;
 }
-/* function generateRecipeUrl(recipeName) {
-    // Reemplaza los espacios por guiones, convierte a minúsculas y agrega la extensión .html
-    return recipeName.trim().toLowerCase().replace(/\s+/g, '-') + '.html';
-} */
 
 // Genera un ID único para cada receta
 function generateUniqueId() {
@@ -155,7 +160,7 @@ const postData = async () => {
         if (response.ok) {
             const jsonResponse = await response.json();
             console.log('Recipe added:', jsonResponse);
-            location.reload();  // Recargar para ver la nueva receta
+            location.reload(); // Recargar para ver la nueva receta
         } else {
             const errorResponse = await response.text();
             console.error('Error response:', errorResponse);

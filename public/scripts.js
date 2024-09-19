@@ -273,6 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target.classList.contains('edit-btn')) {
             const recipeId = event.target.dataset.id;
             fetchRecipeData(recipeId); 
+            document.getElementById('addRecipeBtn').style.display = 'none'; // Esconde el botón de agregar receta de nuevo
         }
     });
     
@@ -301,6 +302,8 @@ document.addEventListener("DOMContentLoaded", function () {
         closeEditModalBtn.addEventListener('click', function () {
             hideModal(editRecipeModal);
             editingRecipeId = null;
+            document.getElementById('addRecipeBtn').style.display = 'block'; // Muestra el botón de agregar receta de nuevo
+
         });
         
         //EDITAR RECETAS EN POSTGRESQL // Manejador del envío del formulario de edición

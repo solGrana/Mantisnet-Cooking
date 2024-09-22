@@ -337,7 +337,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error('Error:', error);
         });
-    });
+    });     
+
     //FIN EDITAR RECETAS EN POSTGRESQL
     
     // Cierra el modal cuando se hace clic fuera de él
@@ -348,7 +349,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 });
-
 
 // Lógica para el modal de administrador
 

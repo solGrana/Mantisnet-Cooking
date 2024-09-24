@@ -1,6 +1,6 @@
 # Mantisnet Cooking
 
-Mantisnet Cooking es una aplicación de recetas que permite a los usuarios visualizar recetas y a los administradores agregar, editar y eliminarlas, con soporte para subir imágenes. La aplicación utiliza una base de datos PostgreSQL para almacenar las recetas y Cloudinary para gestionar las imágenes subidas.
+Mantisnet Cooking es una aplicación web de recetas que permite a los usuarios visualizar recetas y a los administradores agregar, editar y eliminarlas, con soporte para subir imágenes. La aplicación utiliza una base de datos PostgreSQL para almacenar las recetas y Cloudinary para gestionar las imágenes subidas.
 
 ## Características
 - Visualización de recetas.

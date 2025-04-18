@@ -21,7 +21,7 @@
     {
       "recipeName": "Cookies",
       "recipeDescription": "Cookies estilo New York",
-      "recipeIngredients": "200gr manteca,\n1 taza / 200gr azucar blanca,\n1 taza /200gr azucar negro,\n2 huevos + 1 yema de huevo,\nescencia de vainilla,\n320 gr harina,\n1 cucharadita polvo para hornear,\n280gr chips de chocolate",
+      "recipeIngredients": "200gr manteca,\n1 taza / 200gr azucar blanca,\n1 taza /200gr azucar negro,\n2 huevos,\nescencia de vainilla,\n320 gr harina,\n1 cucharadita polvo para hornear,\n280gr chips de chocolate",
       "recipeSteps": "Derreti la manteca a fuego lento hasta obtener un color dorado oscuro. \nEn un recipiente, combina la manteca derretida con el azúcar y mezcla hasta integrar. \nAgrega los huevos y la esencia de vainilla, luego incorpora gradualmente la harina. \nAñadi los chips de chocolate. \nForma bolitas con la masa y ponelas en una bandeja para hornear con papel manteca. \nHornea a 160°C durante 12-13 minutos, o hasta que los bordes estén ligeramente dorados.",
       "recipeImage": "images/cookies.jpeg",
       "url": "cookies.html",
